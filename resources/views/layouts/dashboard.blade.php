@@ -57,9 +57,11 @@
             color: #FFFFFF;
         }
 
-        .xds{
+        .xds {
             text-decoration: none;
-            color: inherit;/
+            color: inherit;
+            font-size: 16px;
+            font-weight: 500;
         }
 
         .nav-link:hover {
@@ -79,6 +81,16 @@
         .nav-item {
             display: flex;
             justify-content: center;
+        }
+
+        .navbar-toggler {
+            outline: none;
+            /* Quita el borde negro (outline) */
+        }
+
+        .navbar-toggler:focus {
+            outline: none;
+            /* Quita el borde al hacer clic en el botón */
         }
     </style>
 </head>
