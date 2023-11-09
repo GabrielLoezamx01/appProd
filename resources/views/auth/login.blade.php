@@ -3,9 +3,9 @@
 @section('content')
     <div class="row d-flex justify-content-center align-items-center " style="min-height: 100vh;">
 
-        <div class="col p-5 m-4 bg-img">
+        <div class="col p-3 bg-img">
                 <img src="img/Frame -login.jpg" class="img-fluid text-center">
-            <div class="bg-app p-5 ">
+            <div class="bg-app p-5">
                 <div class="text-right">
                     <h1 class="title-login">@lang('login.title')</h1>
                     <p class="text-login mt-3">@lang('login.title-p')</p>
@@ -55,7 +55,7 @@
                                 </span>
                             @enderror
                         </div> --}}
-                    <div class="mb-3">
+                    <div class="mb-3 mt-5">
                         @if (Route::has('password.request'))
                             <a class="mt-3 btn-reset fs-6" href="{{ route('password.request') }}">
                                 @lang('login.a-reset-password')

@@ -52,8 +52,30 @@ label{
     opacity: 0.8;
     font-weight: 600;
 }
-
+#password-field2 {
+    border: none;
+    border-bottom: 0.5px solid #000;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none; /* Elimina la sombra en foco */
+    padding-bottom: 15px;
+    font-size: 15px;
+    opacity: 0.8;
+    font-weight: 600;
+}
 #showPassword {
+    border: none;
+    border-bottom: 0.5px solid #000;
+    border-radius: 0;
+    padding: 0;
+    background: transparent; /* Fondo transparente */
+    box-shadow: none; /* Elimina la sombra en foco */
+    padding-bottom: 16px;
+    margin-top: 15px;
+    opacity: 0.8;
+    font-size: 15px;
+}
+#showPassword2 {
     border: none;
     border-bottom: 0.5px solid #000;
     border-radius: 0;

@@ -92,6 +92,20 @@
                 eyeIcon.classList.add('far', 'fa-eye');
             }
         });
+        const passwordInput2 = document.getElementById('password-field2');
+        const showPasswordButton2 = document.getElementById('showPassword2');
+        const eyeIcon2 = document.getElementById('eyeIcon2');
+        showPasswordButton2.addEventListener('click', () => {
+            if (passwordInput2.type === 'password') {
+                passwordInput2.type = 'text';
+                eyeIcon2.classList.remove('far', 'fa-eye');
+                eyeIcon2.classList.add('far', 'fa-eye-slash');
+            } else {
+                passwordInput2.type = 'password';
+                eyeIcon2.classList.remove('far', 'fa-eye-slash');
+                eyeIcon2.classList.add('far', 'fa-eye');
+            }
+        });
     </script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 
