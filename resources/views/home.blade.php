@@ -17,8 +17,86 @@
             <button class="text-color2 btn">Multimedia</button>
         </div>
     </section>
+    <section class="row justify-content-center" style="background-color: #D6DFE4;">
+        <div v-for='item in items' class="col-md-12 mt-5">
+            <div class="card-post">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <div class="imagen-redonda mt-3">
+                            <img src="img/icon.jpg" class="img-fluid" :alt="item.sucursal.nombre"
+                                v-if="item.sucursal.imagen_url == null">
+                        </div>
+                        <div class="m-3">
+                            <h4 class="fw-bold text-start">@{{ item.sucursal.nombre }}</h4>
+                            <address class="text-start fw-light" style="font-size: 17px;" itemprop="address" itemscope
+                                itemtype="http://schema.org/PostalAddress">
+                                <span class="fas fa-map-marker-alt fa-1x" style="color: #8FC82D;"></span>
+                                <span itemprop="streetAddress">@{{ item.sucursal.direccion }}</span>
+                                <span itemprop="addressLocality">,@{{ item.sucursal.ciudad }}</span>
+                                <span itemprop="addressRegion">, @{{ item.sucursal.estado }}</span>
+                                <span itemprop="postalCode">, @{{ item.sucursal.codigo_postal }}</span>
+                            </address>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-start mt-5">
+                    <p class="card-text"> <i class="fas fa-info-circle fa-1x" style="color: #8FC82D;"></i>
+                        @{{ item.contenido }}</p>
+                    <div class="text-start mt-4">
+                        <u class="list-inline">
+                            <li class="list-inline-item rounded-5 mt-2 p-2"
+                                style="background-color: #8FC82D; font-weight: 700; color: #FFFFFF;"
+                                v-for="(ticket, index) in item.tickes" v-if="showAll || index < 5">
+                                <i class="fas fa-tag " style="color: white; "></i> @{{ ticket.etiqueta.nombre }}
+                            </li>
+                        </u>
+                        <button v-if="item.tickes.length > 5 && !showAll" style="cursor: pointer; color: #8FC82D;"
+                            @click="showAllTags(item)" class="btn"> Ver más ..... </button>
 
+                        <hr class="custom-icon">
+                        <!-- Likes de la publicación -->
+                        {{-- <div>
+                                <i class="fas fa-heart" style="color: red;"></i> Likes: @{{ item.likes.length }}
+                            </div> --}}
+                        {{-- <ul class="list-inline">
+                                <li class="list-inline-item">
+                                <i class="fas fa-tag" style="color: white;"></i> Comida
+                                </li>
+                                <li class="list-inline-item">
+                                <i class="fas fa-tag" style="color: white;"></i> Ejemplo
+                                </li>
+                            </ul> --}}
+                    </div>
+                </div>
+                <div class="card-footer text-muted ">
+                    <div class="row">
+                        <div class="col text-center">
+                            {{-- <button @click="toggleLike(item)">
 
+                                @{{ isUserLiked(item) ? 'Desactivar Me Gusta' : 'Activar Me Gusta' }}
+                            </button> --}}
+                            <button @click="toggleLike(item)" class="btn"  v-if="isUserLiked(item) == true">
+                                <i class="fas fa-heart fa-2x" style="color: red;"></i>
+                            </button>
+                            <button @click="toggleLike(item)" class="btn"  v-if="isUserLiked(item) == false">
+                                <i class="fas fa-heart fa-2x custom-icon"></i>
+                            </button>
+                            <span class="badge badge-primary text-dark">@{{ item.likes.length }}</span>
+                        </div>
 
-
+                        <div class="col text-center">
+                            <i class="fas fa-star fa-2x custom-icon"></i>
+                        </div>
+                        <div class="col text-center">
+                            <i class="fas fa-eye fa-2x custom-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5"></div>
+            </div>
+        </div>
+    </section>
+    @push('scripts')
+        <script src="js/post/index.js"></script>
+    @endpush
 @endsection

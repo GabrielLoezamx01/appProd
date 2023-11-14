@@ -28,4 +28,8 @@ class Post extends Model
     {
         return $this->hasMany(ImagesPost::class, 'publicacion_id');
     }
+    public function tickes()
+    {
+        return $this->hasMany(TickesPost::class, 'publicacion_id');
+    }
 }

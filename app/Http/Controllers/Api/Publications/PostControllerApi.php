@@ -11,7 +11,7 @@ class PostControllerApi extends Controller
      */
     public function index()
     {
-        return Post::with(['sucursal','likes','images'])->get();
+        return Post::with(['sucursal','likes','images','tickes.etiqueta'])->get();
     }
 
     /**
