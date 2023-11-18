@@ -335,3 +335,44 @@ hr {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.circular-btn {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+
+.text-size{
+    font-size: 17px;
+}
+.border-hide{
+    border-right: 2px solid #96CCAA;
+}
+@media screen and (max-width: 500px) {
+    /* Agrega tus estilos aquí */
+    .imagen-redonda {
+        width: 30%;
+        height: 30%;
+    }
+    .move-m{
+        transform: translateY(15px);
+        margin: 10px;
+    }
+  }
+  @media screen and (max-width: 392px) {
+        .imagen-redonda {
+            width: 40%;
+            height: 40%;
+        }
+        .text-size{
+            font-size: 6vh;
+        }
+        .border-hide{
+            border-right: 2px solid #FFFFFF;
+        }
+  }
