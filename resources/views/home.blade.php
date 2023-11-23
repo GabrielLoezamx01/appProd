@@ -77,11 +77,9 @@
 
                                 @{{ isUserLiked(item) ? 'Desactivar Me Gusta' : 'Activar Me Gusta' }}
                             </button> --}}
-                            <button @click="toggleLike(item)" class="btn" v-if="isUserLiked(item) == true">
-                                <i class="fas fa-heart fa-2x" style="color: red;"></i>
-                            </button>
-                            <button @click="toggleLike(item)" class="btn" v-if="isUserLiked(item) == false">
-                                <i class="fas fa-heart fa-2x custom-icon"></i>
+                            <button @click="toggleLike(item)" class="btn">
+                                <i v-if="isUserLiked(item)" class="fas fa-heart fa-2x" style="color: red;"></i>
+                                <i v-else class="fas fa-heart fa-2x custom-icon"></i>
                             </button>
                             <span class="badge badge-primary text-dark">@{{ item.likes.length }}</span>
                         </div>

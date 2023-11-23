@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <button class="navbar-toggler border-0" style="color #8FC82D;" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
@@ -45,7 +45,7 @@
         </div>
     </nav>
 
-    <div id="app">
+    <div id="app" style="   margin-top: 60px; ">
         <main class="container-fluid">
             @yield('content')
         </main>
