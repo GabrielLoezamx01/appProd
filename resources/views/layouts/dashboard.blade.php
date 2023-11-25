@@ -32,11 +32,11 @@
                 <ul class="navbar-nav">
                     <li class="nav-item d-flex align-items-center nav-bg">
                         <i class="fas fa-home mr-2"></i>
-                        <a class="p-3 xds" href="#">Inicio</a>
+                        <a class="p-3 xds" href="">Inicio</a>
                     </li>
                     <li class="nav-item d-flex align-items-center nav-bg">
-                        <i class="fas fa-home mr-2"></i>
-                        <a class="p-3 xds" href="#">Inicio</a>
+                        <i class="fas fa-user mr-2"></i>
+                        <a class="p-3 xds" href="perfil">Perfil</a>
                     </li>
                     <li class="nav-item d-flex align-items-center nav-bg">
                         <i class="fas fa-home mr-2"></i>

@@ -1,4 +1,4 @@
-<div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true" @hidden.bs.modal="onModalHidden">
+<div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header text-center m-3">
@@ -11,6 +11,7 @@
             <div class="modal-body m-3">
                 <label for="InputSelect" class="text-login fs-6">Seleccione categoria</label>
                 <div class="custom-select">
+
                     <select v-model="selectedCategory" class="btn-app fw-light">
                         <option :disabled="true" :value="null"> Categorias </option>
                         <option v-for="category in categories" style="opacity: 0.6;" :key="category.id"
@@ -25,7 +26,8 @@
                     placeholder="¿Que hay de nuevo?" rows="10"></textarea>
             </div>
             <div class="modal-footer text-center">
-                <button @click="PostPublication()" type="button" class="btn-login">Publicar</button>
+                <button @click="PostPublication()" data-bs-dismiss="modal"
+                aria-label="Close" type="button" class="btn-login">Publicar</button>
             </div>
         </div>
     </div>

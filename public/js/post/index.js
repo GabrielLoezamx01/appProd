@@ -1,7 +1,7 @@
 var apiPublications = '/customer/Publications';
 var apiLikes = 'customer/Likes_Publications/';
 var apiPublicationsClients = 'customer/ClientsPublications';
-var id_user       = document.querySelector("meta[name='user_id']").getAttribute('content');
+var id_user = document.querySelector("meta[name='user_id']").getAttribute('content');
 var apiCategories = 'categorias';
 
 const app = new Vue({
@@ -26,8 +26,8 @@ const app = new Vue({
         },
         getCategories: function () {
             axios
-            .get(apiCategories)
-            .then(response => (this.categories = response.data))
+                .get(apiCategories)
+                .then(response => (this.categories = response.data))
         },
         showAllTags: function (item) {
             this.showAll = true;
@@ -60,26 +60,25 @@ const app = new Vue({
                     });
             }
         },
-            PostPublication: function () {
-                var body = {
-                    'category_id': this.selectedCategory,
-                    'content': this.content
-                };
+        PostPublication: function () {
+            var body = {
+                'category_id': this.selectedCategory,
+                'content': this.content
+            };
 
-                axios.post(apiPublicationsClients, body)
-                    .then(response => {
-                        document.querySelector('#miModal').style.display = "none";
-                        document.querySelector('.modal-backdrop').remove();
-                        new Toast({ message: response.data.message, type: 'success' });
-                        this.content = '';
-                        this.selectedCategory = null;
-                    })
-                    .catch(error => {
-                        console.error('Error al hacer la solicitud POST:', error);
-                    });
-            },
+            axios.post(apiPublicationsClients, body)
+                .then(response => {
+                    new Toast({ message: response.data.message, type: 'success' });
+                    this.content = '';
+                    this.selectedCategory = null;
+                })
+                .catch(error => {
+                    new Toast({ message: 'Error al hacer la solicitud', type: 'danger' });
+                    console.error('Error al hacer la solicitud POST:', error);
+                });
+        },
         abrirModal: function () {
-           var miModal       = new bootstrap.Modal(document.getElementById('miModal'));
+            var miModal = new bootstrap.Modal(document.getElementById('miModal'));
             miModal.show();
         }
     }

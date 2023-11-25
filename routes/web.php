@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Categorias\CategoriasController;
+use App\Http\Controllers\User\ProfileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +25,11 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::apiResource('categorias', CategoriasController::class);
+
+Route::apiResource('profile', ProfileController::class);
+Route::view('perfil','auth.profile');
 
 
 /*
