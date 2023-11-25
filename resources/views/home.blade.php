@@ -1,7 +1,6 @@
 @extends('layouts.dashboard')
 @section('title', 'Bienvenido')
 @section('content')
-    @include('home.modalPost')
     <div class="row">
         <div class="p-4">
             <div class="search-container">
@@ -10,6 +9,7 @@
             </div>
         </div>
     </div>
+    @include('home.modalPost')
     <section class="row text-center bg-white p-3">
         <div class="col d-flex align-items-center justify-content-center border-hide">
             <button class="text-color2 btn">Publicaciones</button>
@@ -96,7 +96,7 @@
             </div>
         </div>
     </section>
-    <button class="btn btn-floating circular-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+    <button @click="abrirModal()" class="btn btn-floating circular-btn"
         style="position: fixed; bottom: 20px; right: 20px; background-color: #8FC82D;">
         <i class="fas fa-plus fa-2x text-white"></i>
     </button>

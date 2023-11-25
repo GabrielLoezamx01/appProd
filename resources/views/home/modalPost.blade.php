@@ -1,6 +1,5 @@
-<div class="modal fade custom-modal "  id="staticBackdrop" data-bs-backdrop="static"
-    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+<div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true" @hidden.bs.modal="onModalHidden">
+    <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header text-center m-3">
                 <img src="img/icon.jpg" class="img-fluid rounded-circle" style="width: 20px; height: 20px;">
@@ -11,20 +10,22 @@
             </div>
             <div class="modal-body m-3">
                 <label for="InputSelect" class="text-login fs-6">Seleccione categoria</label>
-                    <div class="custom-select">
-                        <select v-model="selectedCategory" class="btn-app fw-light">
-                            <option :disabled="true" :value="null"> Categorias </option>
-                            <option v-for="category in categories" style="opacity: 0.6;" :key="category.id" :value="category.id">
-                                @{{ category.name }}
-                            </option>
-                        </select>
-                        <div class="icon" style="opacity: 0.6;"><i class="fas fa-chevron-down"
-                                style="opacity: 0.6;"></i></div>
+                <div class="custom-select">
+                    <select v-model="selectedCategory" class="btn-app fw-light">
+                        <option :disabled="true" :value="null"> Categorias </option>
+                        <option v-for="category in categories" style="opacity: 0.6;" :key="category.id"
+                            :value="category.id">
+                            @{{ category.name }}
+                        </option>
+                    </select>
+                    <div class="icon" style="opacity: 0.6;"><i class="fas fa-chevron-down" style="opacity: 0.6;"></i>
                     </div>
-                    <textarea class="mt-3 post-content fw-light text-justify" placeholder="¿Que hay de nuevo?" rows="10"></textarea>
+                </div>
+                <textarea v-model="content" maxlength="300" class="mt-3 post-content fw-light text-justify"
+                    placeholder="¿Que hay de nuevo?" rows="10"></textarea>
             </div>
             <div class="modal-footer text-center">
-                <button type="button" class="btn-login">Publicar</button>
+                <button @click="PostPublication()" type="button" class="btn-login">Publicar</button>
             </div>
         </div>
     </div>

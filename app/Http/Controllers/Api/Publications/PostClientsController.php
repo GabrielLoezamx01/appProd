@@ -1,18 +1,19 @@
 <?php
 
 namespace App\Http\Controllers\Api\Publications;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Models\PublicacionesClientes;
 use Illuminate\Support\Facades\Auth;
-class PostControllerApi extends Controller
+class PostClientsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Post::with(['sucursal','likes','images','tickes.etiqueta'])->get();
+        return PublicacionesClientes::with(['usuario','categoria'])->get();
     }
 
     /**
@@ -20,7 +21,17 @@ class PostControllerApi extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'category_id' => 'required|exists:categorias,id',
+            'content' => 'required|string',
+        ]);
+        $publicacion = new PublicacionesClientes([
+            'user_id'      => Auth::id(),
+            'categoria_id' => $request->category_id,
+            'contenido'    => $request->content,
+        ]);
+        $publicacion->save();
+        return response()->json(['message' => 'Publicación creada con éxito', 'publicacion' => $publicacion], 201);
     }
 
     /**
