@@ -357,45 +357,49 @@ hr {
     border-right: 2px solid #96CCAA;
 }
 
-
 .custom-select {
     position: relative;
     display: inline-block;
-    margin-right: 10px;
+    margin: 10px;
+    width: 90%;
   }
-  .custom-select select {
-    /* Tu estilo existente */
+
+  select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-color: transparent;
-    padding: 8px 30px 8px 10px;
-    margin: 10px;
-    border: 2px solid rgba(0, 0, 0, 0.068);
-    border-radius: 10px;
-    cursor: pointer;
     width: 100%;
-    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    cursor: pointer;
+    padding-left: 30px;
+    opacity: 0.6;
   }
 
-  .custom-select::after {
-    content: '\f107'; /* Código de flecha hacia abajo */
+  select:focus {
+    outline: none;
+  }
+
+  .icon {
     position: absolute;
     top: 50%;
-    right: 2px;
+    right: 10px;
     transform: translateY(-50%);
-    pointer-events: none;
   }
-
-  .custom-select select:hover {
-
+  textarea::placeholder {
+    opacity: 0.4;
   }
-
-
-
-
-
-
+.post-content{
+    border: none;
+    outline: none;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.3);
+}
 
 @media screen and (max-width: 500px) {
     /* Agrega tus estilos aquí */
