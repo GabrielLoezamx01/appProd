@@ -26,16 +26,17 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::apiResource('categorias', CategoriasController::class);
 
-Route::apiResource('profile', ProfileController::class);
-Route::view('perfil','auth.profile');
-
-
-/*
-*   CLIENTES RUTAS
-*/
-Route::prefix('customer')->group(function () {
-    require('Cliente/Master.php');
+Route::middleware(['auth'])->group(function () {
+    Route::apiResource('categorias', CategoriasController::class);
+    Route::apiResource('profile', ProfileController::class);
+    Route::view('perfil','auth.profile');
+    /*
+    *   CLIENTES RUTAS
+    */
+    Route::prefix('customer')->group(function () {
+        require('Cliente/Master.php');
+    });
 });
+
 

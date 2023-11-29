@@ -14,7 +14,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return DataUsers::find(Auth::id());
+        $dataUser = DataUsers::where('user_id', Auth::id())->first();
+        return $dataUser;
     }
 
     /**
@@ -23,25 +24,34 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'user_id' => 'required|integer',
-            'codigopostal' => 'required|string',
+            'codigopostal' => 'required',
             'nombres' => 'required|string',
             'apellidos' => 'required|string',
-            'telefono' => 'required|string',
-            'fotodeperfil' => 'nullable|string',
+            'telefono' => 'required',
             'estado' => 'required|string',
             'ciudad' => 'required|string',
             'direccion' => 'required|string',
         ];
-
-        // Validar los datos
+        $nameIMG = '';
         try {
             $validatedData = $this->validate($request, $rules);
         } catch (ValidationException $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
-        DataUsers::store($validatedData);
-        return response()->json(['message' => 'Datos almacenados con éxito'], 201);
+        if ($request->hasFile('fotoPerfil')) {
+            // Obtener el archivo
+            $file = $request->file('fotoPerfil');
+            // Generar un nombre único para el archivo
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            // Mover el archivo a la carpeta de almacenamiento
+            $file->move(public_path('uploads'), $fileName);
+            // Agregar el nombre del archivo a los datos validados
+            $nameIMG = $fileName;
+        }
+        $validatedData['user_id']    = Auth::id();
+        $validatedData['fotoPerfil'] = $nameIMG;
+        DataUsers::create($validatedData);
+        return response()->json(['message' => 'Datos almacenados con éxito'], 200);
     }
 
     /**

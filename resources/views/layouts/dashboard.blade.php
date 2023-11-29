@@ -47,7 +47,7 @@
         </div>
     </nav>
 
-    <div id="app" style="   margin-top: 60px; ">
+    <div id="app" style="   margin-top: 50px; ">
         <main class="container-fluid">
             @yield('content')
         </main>

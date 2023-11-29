@@ -24,8 +24,4 @@ class DataUsers extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function store(array $data)
-    {
-        return static::create($data);
-    }
 }
