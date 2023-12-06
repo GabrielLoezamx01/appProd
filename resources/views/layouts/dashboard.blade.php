@@ -39,6 +39,10 @@
                         <a class="p-3 xds" href="perfil">Perfil</a>
                     </li>
                     <li class="nav-item d-flex align-items-center nav-bg">
+                        <i class="fas fa-book mr-2"></i>
+                        <a class="p-3 xds" href="MisPublicaciones">Mis Publicaciones</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center nav-bg">
                         <i class="fas fa-home mr-2"></i>
                         <a class="p-3 xds" href="#">Inicio</a>
                     </li>

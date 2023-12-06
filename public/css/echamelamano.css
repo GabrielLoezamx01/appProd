@@ -83,7 +83,15 @@ label {
     opacity: 0.8;
     font-weight: 600;
 }
+.custom-page-link {
+    background-color: rgb(143, 200, 45);
+    color: #fff; /* Color de texto blanco */
+}
 
+.custom-page-link:hover,
+.custom-page-link:focus {
+    background-color: #96cc33; /* Cambia el color al pasar el mouse o enfocar */
+}
 #showPassword {
     border: none;
     border-bottom: 0.5px solid #000;

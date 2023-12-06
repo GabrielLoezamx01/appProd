@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('profileIMG', [ProfileController::class, 'update'])->name('profileIMG');
 
     Route::view('perfil','auth.profile');
+    Route::view('MisPublicaciones','auth.Publications');
+
     /*
     *   CLIENTES RUTAS
     */

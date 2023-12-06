@@ -13,7 +13,9 @@ class PostClientsController extends Controller
      */
     public function index()
     {
-        return PublicacionesClientes::with(['usuario','categoria'])->get();
+        return PublicacionesClientes::with(['usuario', 'categoria'])
+        ->where('user_id', Auth::id())
+        ->paginate(10);
     }
 
     /**
@@ -23,7 +25,7 @@ class PostClientsController extends Controller
     {
         $request->validate([
             'category_id' => 'required|exists:categorias,id',
-            'content' => 'required|string',
+            'content'     => 'required|string',
         ]);
         $publicacion = new PublicacionesClientes([
             'user_id'      => Auth::id(),
@@ -39,7 +41,7 @@ class PostClientsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return PublicacionesClientes::find($id);
     }
 
     /**
@@ -47,7 +49,23 @@ class PostClientsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $publicacion = PublicacionesClientes::find($id);
+        if ($publicacion) {
+            $request->validate([
+                'contenido' => 'required|string',
+                'categoria_id' => 'exists:categorias,id',
+            ]);
+            $user_id = Auth::id();
+            $publicacion->update([
+                'user_id'      => $user_id,
+                'contenido'    => $request->input('contenido'),
+                'categoria_id' => $request->input('categoria_id'),
+                'me_gusta'     => 0,
+            ]);
+            return response()->json(['data' => $publicacion], 200);
+        } else {
+            return response()->json(['error' => 'La publicación no se encontró'], 404);
+        }
     }
 
     /**
@@ -55,6 +73,12 @@ class PostClientsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $publicacionAEliminar = PublicacionesClientes::find($id);
+        if ($publicacionAEliminar) {
+            $publicacionAEliminar->delete();
+            return response()->json(['mensaje' => 'La publicación fue eliminada correctamente'], 200);
+        } else {
+            return response()->json(['error' => 'La publicación no se encontró'], 404);
+        }
     }
 }
