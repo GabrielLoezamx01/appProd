@@ -73,10 +73,9 @@
                 <div class="card-footer text-muted ">
                     <div class="row">
                         <div class="col text-center">
-                            {{-- <button @click="toggleLike(item)">
+                            <div v-if="isUserLiked(item)" >
 
-                                @{{ isUserLiked(item) ? 'Desactivar Me Gusta' : 'Activar Me Gusta' }}
-                            </button> --}}
+                            </div>
                             <button @click="toggleLike(item)" class="btn">
                                 <i v-if="isUserLiked(item)" class="fas fa-heart fa-2x" style="color: red;"></i>
                                 <i v-else class="fas fa-heart fa-2x custom-icon"></i>

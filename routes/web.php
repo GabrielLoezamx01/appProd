@@ -30,6 +30,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth'])->group(function () {
     Route::apiResource('categorias', CategoriasController::class);
     Route::apiResource('profile', ProfileController::class);
+    Route::post('profileIMG', [ProfileController::class, 'update'])->name('profileIMG');
+
     Route::view('perfil','auth.profile');
     /*
     *   CLIENTES RUTAS

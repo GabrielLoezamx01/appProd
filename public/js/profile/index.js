@@ -10,7 +10,7 @@ const app = new Vue({
             nombres: '',
             apellidos: '',
             telefono: '',
-            fotoPerfil: null, // Utilizar null para manejar archivos
+            fotodeperfil: null, // Utilizar null para manejar archivos
             codigopostal: '',
             estado: '',
             ciudad: '',
@@ -22,15 +22,15 @@ const app = new Vue({
     },
     methods: {
         getUser: function () {
-            new Toast({ message: 'Cargando.......', type: 'warning' });
             axios
             .get(userData)
             .then(response => {
                 if (response.data) {
                     this.usuario = response.data;
-                    new Toast({ message: 'Datos cargado con exito', type: 'success' });
+                    console.log(this.usuario);
+                     new Toast({ message: 'Datos cargado con exito', type: 'success' });
                   } else {
-                    new Toast({ message: 'Registra tus datos', type: 'danger' });
+                      new Toast({ message: 'Registra tus datos', type: 'warning' });
                   }
             })
             .catch(error => {
@@ -40,17 +40,11 @@ const app = new Vue({
         enviarFormulario: function () {
             axios.post(userData, this.usuario)
                 .then(response => {
-                    console.log(response.data);
-                    location.reload();
+                    new Toast({ message: 'Registrado Correctamente', type: 'success' });
                 })
                 .catch(error => {
                     console.error(error);
                 });
-        },
-        cargarFotoPerfil(event) {
-            // Manejar la carga de la foto de perfil
-            // event.target.files contiene los archivos seleccionados
-            this.usuario.fotoPerfil = event.target.files[0];
         },
         PostPublication: function () {
             var body = {

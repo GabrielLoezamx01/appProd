@@ -42,6 +42,7 @@ const app = new Vue({
                 axios.delete(url)
                     .then(response => {
                         this.getPost();
+                        this.isUserLiked(); 
                     })
                     .catch(error => {
                         console.error('Error en la solicitud DELETE:', error);
@@ -65,7 +66,6 @@ const app = new Vue({
                 'category_id': this.selectedCategory,
                 'content': this.content
             };
-
             axios.post(apiPublicationsClients, body)
                 .then(response => {
                     new Toast({ message: response.data.message, type: 'success' });

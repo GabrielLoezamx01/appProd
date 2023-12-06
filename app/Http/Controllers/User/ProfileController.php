@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\DataUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Storage;
+
 class ProfileController extends Controller
 {
     /**
@@ -32,25 +34,18 @@ class ProfileController extends Controller
             'ciudad' => 'required|string',
             'direccion' => 'required|string',
         ];
-        $nameIMG = '';
         try {
             $validatedData = $this->validate($request, $rules);
         } catch (ValidationException $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
-        if ($request->hasFile('fotoPerfil')) {
-            // Obtener el archivo
-            $file = $request->file('fotoPerfil');
-            // Generar un nombre único para el archivo
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            // Mover el archivo a la carpeta de almacenamiento
-            $file->move(public_path('uploads'), $fileName);
-            // Agregar el nombre del archivo a los datos validados
-            $nameIMG = $fileName;
+        $existingRecord = DataUsers::where('user_id', Auth::id())->first();
+        if ($existingRecord) {
+            $existingRecord->update($validatedData);
+        } else {
+            $validatedData['user_id'] = Auth::id();
+            DataUsers::create($validatedData);
         }
-        $validatedData['user_id']    = Auth::id();
-        $validatedData['fotoPerfil'] = $nameIMG;
-        DataUsers::create($validatedData);
         return response()->json(['message' => 'Datos almacenados con éxito'], 200);
     }
 
@@ -65,9 +60,36 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $foto               = $request->file('foto');
+        $nombreImagen       = time() . '_' . $foto->getClientOriginalName();
+        $ruta               = $foto->storeAs('public/fotos_perfil', $nombreImagen);
+        $existingRecord     = DataUsers::where('user_id', Auth::id())->first();
+        if ($existingRecord) {
+            $nombreFotoAnterior = $existingRecord->fotodeperfil;
+            if ($nombreFotoAnterior) {
+                Storage::delete('public/fotos_perfil/' . $nombreFotoAnterior);
+            }
+            $existingRecord->update(['fotodeperfil' => $nombreImagen]);
+        } else {
+            $validatedData = [
+                'codigopostal' => '',
+                'nombres' => '',
+                'apellidos' => '',
+                'telefono' => '',
+                'estado' => '',
+                'ciudad' => '',
+                'direccion' => '',
+            ];
+            $validatedData['user_id']      = Auth::id();
+            $validatedData['fotodeperfil'] = $nombreImagen;
+            DataUsers::insert($validatedData);
+        }
+        return back()->with('success', "Imagen de perfil '$nombreImagen' actualizada correctamente.");
     }
 
     /**
