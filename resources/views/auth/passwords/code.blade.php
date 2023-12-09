@@ -15,23 +15,18 @@
                     @endforeach
                 @endif
                 </div>
-                <form method="POST" action="{{ route('SendEmail') }}" class="mt-3">
+                <form method="POST" action="{{ route('Verify') }}" class="mt-3">
                     @csrf
                     <div class="mb-3">
-                        <label for="email" class="fw-light">@lang('login.input-email')</label>
-                        <input type="email" class="borderless-input mt-3  @error('email') is-invalid @enderror"
-                            placeholder="@lang('login.input-email-placeholder')" name="email" value="{{ old('email') }}" required
-                            autocomplete="email" autofocus>
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <label for="code" class="fw-light">Por favor, introduce el código.</label>
+                        <input type="text" class="borderless-input mt-3  @error('email') is-invalid @enderror"
+                         name="code" value="{{ old('code') }}" required
+                            autocomplete="CODE" autofocus>
                     </div>
                     <div class="mb-3 mt-5">
                         <div class="mt-5 text-center">
                             <button type="submit" class=" btn-login btn-large ">
-                                Recuperar
+                                Verificar
                             </button>
                         </div>
                     </div>

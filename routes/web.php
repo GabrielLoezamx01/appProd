@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Categorias\CategoriasController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\ResetPassword;
+
 
 
 /*
@@ -25,7 +27,12 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/EmailReset',[ResetPassword::class , 'SendEmail'])->name('SendEmail');
+Route::post('/Verify',[ResetPassword::class , 'Verify'])->name('Verify');
+Route::post('/updatePassword',[ResetPassword::class , 'updatePassword'])->name('updatePassword');
 
+
+Route::view('CodeInsert','auth.passwords.code')->name('CodeInsert');
 
 Route::middleware(['auth'])->group(function () {
     Route::apiResource('categorias', CategoriasController::class);
