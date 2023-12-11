@@ -64,9 +64,8 @@
                         <label for="password" class="fw-light">@lang('register.type')</label>
                         <div class="input-group">
                             <select name="type" id="" class="borderless-input" required>
-                                @foreach ($roles as $role)
-                                    <option value="{{$role['id']}}">{{$role['name']}}</option>
-                                @endforeach
+                                <option value="1">cliente</option>
+                                <option value="2">vendedor</option>
                             </select>
                         </div>
                     </div>
