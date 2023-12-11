@@ -57,7 +57,7 @@ class ResetPassword extends Controller
         $code          = $validatedData['code'];
         $data          = ResetUser::where('code',$code)->first();
         $time          = Carbon::now()->toDateTimeString();
-       if($data->count()){
+       if(!empty($data)){
             if($data->expire < $time ){
                 if($code == $data['code']){
                     return view('auth.passwords.newPassword')->with('user_id',$data['user_id']);
