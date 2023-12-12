@@ -27,7 +27,7 @@
                     <div class="card-footer text-muted ">
                         <div class="row">
                             <div class="col text-center">
-                                <button class="btn ">
+                                <button class="btn" @click="deletePost(item.id)">
                                     <i class="fas fa-trash-alt fa-2x custom-icon"></i>
                                 </button>
                             </div>

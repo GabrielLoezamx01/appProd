@@ -42,7 +42,7 @@ const app = new Vue({
                 axios.delete(url)
                     .then(response => {
                         this.getPost();
-                        this.isUserLiked(); 
+                        this.isUserLiked();
                     })
                     .catch(error => {
                         console.error('Error en la solicitud DELETE:', error);
@@ -73,8 +73,8 @@ const app = new Vue({
                     this.selectedCategory = null;
                 })
                 .catch(error => {
-                    new Toast({ message: 'Error al hacer la solicitud', type: 'danger' });
-                    console.error('Error al hacer la solicitud POST:', error);
+                    new Toast({ message: 'Error al hacer la solicitud, verifica los datos antes de publicar', type: 'danger' });
+
                 });
         },
         abrirModal: function () {

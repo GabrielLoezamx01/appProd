@@ -4,7 +4,7 @@
 @section('content')
     <div class="row d-flex justify-content-center align-items-center " style="min-height: 100vh;">
         <div class="col p-3 bg-img">
-            <img src="img/Frame -login.jpg" class="img-fluid text-center">
+            <img src="{{ asset('img/Frame -login.jpg') }}" class="img-fluid text-center">
             <div class="bg-app p-5">
                 <div class="text-right">
                     <h1 class="title-login">Recuperar Cuenta</h1>

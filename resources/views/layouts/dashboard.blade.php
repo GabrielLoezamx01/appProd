@@ -43,8 +43,8 @@
                         <a class="p-3 xds" href="MisPublicaciones">Mis Publicaciones</a>
                     </li>
                     <li class="nav-item d-flex align-items-center nav-bg">
-                        <i class="fas fa-home mr-2"></i>
-                        <a class="p-3 xds" href="#">Inicio</a>
+                        <i class="fas fa-sign-out-alt mr-2"></i>
+                        <a class="p-3 xds" href="closeUser">Cerrar Sesión</a>
                     </li>
                 </ul>
             </div>

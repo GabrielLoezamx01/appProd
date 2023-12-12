@@ -58,16 +58,14 @@ class ResetPassword extends Controller
         $data          = ResetUser::where('code',$code)->first();
         $time          = Carbon::now()->toDateTimeString();
        if(!empty($data)){
-            if($data->expire < $time ){
-                if($code == $data['code']){
+        if ($data && Carbon::now() <= Carbon::parse($data->expire)) {
+                if($code === $data->code){
                     return view('auth.passwords.newPassword')->with('user_id',$data['user_id']);
+                }else{
+                    return back()->withErrors(['error' => 'El código del Codigo no coincide']);
                 }
-                return back()->withErrors(['error' => 'Codigo Incorrecto']);
-            }else{
-                if($data->count() && isset($data->user_id)){
-                    ResetUser::where('user_id', $data->user_id)->delete();
-                }
-                return back()->withErrors(['error' => 'Codigo Expirado']);
+        }else{
+                return back()->withErrors(['error' => 'El Codigo ha expirado']);
             }
        }else{
          return back()->withErrors(['error' => 'Codigo Incorrecto']);

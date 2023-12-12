@@ -13,8 +13,9 @@ class PostClientsController extends Controller
      */
     public function index()
     {
-        return PublicacionesClientes::with(['usuario', 'categoria'])
+       return PublicacionesClientes::with(['usuario', 'categoria'])
         ->where('user_id', Auth::id())
+        ->orderBy('created_at', 'desc') // Order by the created_at column in descending order
         ->paginate(10);
     }
 
@@ -76,7 +77,7 @@ class PostClientsController extends Controller
         $publicacionAEliminar = PublicacionesClientes::find($id);
         if ($publicacionAEliminar) {
             $publicacionAEliminar->delete();
-            return response()->json(['mensaje' => 'La publicación fue eliminada correctamente'], 200);
+            return response()->json(['message' => 'La publicación fue eliminada correctamente'], 200);
         } else {
             return response()->json(['error' => 'La publicación no se encontró'], 404);
         }
