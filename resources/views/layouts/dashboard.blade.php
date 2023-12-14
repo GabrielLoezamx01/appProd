@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @if (Auth::check())
-     <meta name="user_id" content="{{ Auth::user()->id }}" />
+        <meta name="user_id" content="{{ Auth::user()->id }}" />
     @endif
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -30,21 +30,29 @@
             <a class="navbar-brand" href="#">Mi Sitio</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item d-flex align-items-center nav-bg">
-                        <i class="fas fa-home mr-2"></i>
-                        <a class="p-3 xds" href="/home">Inicio</a>
+                    <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
+                        <div class="m-2">
+                            <i class="fas fa-home mr-2"></i>
+                            <a class="p-3 xds" href="/home">Inicio</a>
+                        </div>
                     </li>
-                    <li class="nav-item d-flex align-items-center nav-bg">
-                        <i class="fas fa-user mr-2"></i>
-                        <a class="p-3 xds" href="perfil">Perfil</a>
+                    <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
+                        <div class="m-2">
+                            <i class="fas fa-user mr-2"></i>
+                            <a class="p-3 xds" href="perfil">Perfil</a>
+                        </div>
                     </li>
-                    <li class="nav-item d-flex align-items-center nav-bg">
-                        <i class="fas fa-book mr-2"></i>
-                        <a class="p-3 xds" href="MisPublicaciones">Mis Publicaciones</a>
+                    <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
+                        <div class="m-2">
+                            <i class="fas fa-book mr-2"></i>
+                            <a class="p-3 xds" href="MisPublicaciones">Mis Publicaciones</a>
+                        </div>
                     </li>
-                    <li class="nav-item d-flex align-items-center nav-bg">
-                        <i class="fas fa-sign-out-alt mr-2"></i>
-                        <a class="p-3 xds" href="closeUser">Cerrar Sesión</a>
+                    <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
+                        <div class="m-2">
+                            <i class="fas fa-sign-out-alt mr-2"></i>
+                            <a class="p-3 xds" href="closeUser">Cerrar Sesión</a>
+                        </div>
                     </li>
                 </ul>
             </div>
