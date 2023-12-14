@@ -10,13 +10,13 @@
 
                     </div>
                     <div class="card-body text-start mt-5">
-                        <p class="card-text text-info text-dark"> <i class="fas fa-info-circle fa-1x"
+                        <p class="card-text text-info text-dark m-4" style="font-size: 15px;"> <i class="fas fa-info-circle fa-1x"
                                 style="color: #8FC82D;"></i>
                             @{{ item.contenido }}</p>
-                        <div class="text-start mt-4">
+                            <div class="text-start mt-2 m-4">
                             <u class="list-inline">
                                 <li class="list-inline-item rounded-5 mt-2 p-2"
-                                    style="background-color: #8FC82D; font-weight: 700; color: #FFFFFF; height: 10%; font-size: 13px">
+                                    style="background-color: #8FC82D; font-weight: 700; color: #FFFFFF; height: 10%; font-size: 10px">
                                     <i class="fas fa-tag " style="color: white; "></i> @{{ item.categoria.name }}
                                 </li>
                             </u>
@@ -28,11 +28,11 @@
                         <div class="row">
                             <div class="col text-center">
                                 <button class="btn" @click="deletePost(item.id)">
-                                    <i class="fas fa-trash-alt fa-2x custom-icon"></i>
+                                    <i class="fas fa-trash-alt custom-icon text-danger"></i>
                                 </button>
                             </div>
                             <div class="col text-center">
-                                <button class="btn ">
+                                <button class="btn" data-bs-toggle="modal" href="#exampleModalToggle" @click="showData(item.id)" >
                                     <i class="fas fa-edit fa-2x custom-icon"></i>
                                 </button>
                             </div>
@@ -72,6 +72,40 @@
                 </nav>
             </div>
         </section>
+        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+            tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header text-center m-3">
+                        <img src="img/icon.jpg" class="img-fluid rounded-circle" style="width: 20px; height: 20px;">
+                        <h1 class="modal-title fs-5 fw-bold " style="margin-left: 20px;" id="staticBackdropLabel">Editar
+                        </h1>
+                        <button type="button" class="btn-close fw-bold" style="color: #062D00" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body m-3">
+                        <label for="InputSelect" class="text-login fs-6">Seleccione categoria</label>
+                        <div class="custom-select">
+
+                            <select v-model="selectedCategory" class="btn-app fw-light">
+                                <option :disabled="true" :value="null"> Categorias </option>
+                                <option v-for="category in categories" style="opacity: 0.6;" :key="category.id"
+                                    :value="category.id">
+                                    @{{ category.name }}
+                                </option>
+                            </select>
+                            <div class="icon" style="opacity: 0.6;"><i class="fas fa-chevron-down" style="opacity: 0.6;"></i>
+                            </div>
+                        </div>
+                        <textarea v-model="content" maxlength="300" class="mt-3 post-content fw-light text-justify"
+                            placeholder="¿Que hay de nuevo?" rows="10"></textarea>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <button @click="updateData()" type="button" class="btn-login">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     @push('scripts')
         <script src="js/profile/mypost.js"></script>

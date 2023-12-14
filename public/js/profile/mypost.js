@@ -1,14 +1,21 @@
 var id_user = document.querySelector("meta[name='user_id']").getAttribute('content');
 var api = 'customer/ClientsPublications';
+var apiCategories = 'categorias';
+
 const app = new Vue({
     el: '#app',
     data: {
         Data: [],
         pagination: {},
-        refresData: false
+        refresData: false,
+        categories: [],
+        selectedCategory: null,
+        content: '',
+        idupdate: 0
     },
     mounted() {
         this.getData();
+        this.getCategories();
     },
     methods: {
         getData: function (page = 1) {
@@ -26,6 +33,11 @@ const app = new Vue({
                 .catch(error => {
                     console.error('Error al obtener datos:', error);
                 });
+        },
+        getCategories: function () {
+            axios
+                .get(apiCategories)
+                .then(response => (this.categories = response.data))
         },
         deletePost: function (idPost){
                 new Toast({
@@ -63,7 +75,26 @@ const app = new Vue({
                     ]
                 });
         },
-
+        showData: function (id){
+            axios
+            .get(api + '/' + id)
+            .then(response => {
+               this.selectedCategory = response.data.categoria_id;
+               this.content = response.data.contenido;
+               this.idupdate = response.data.id;
+            })
+        },
+        updateData: function (){
+            var request = {
+                categoria_id: this.selectedCategory,
+                contenido: this.content,
+              };
+            axios
+            .patch(api + '/' + this.idupdate, request)
+            .then(response => {
+              new Toast({ message: 'Actualizado', type: 'success' });
+            })
+        }
         // getUser: function () {
         //     axios
         //     .get(userData)
