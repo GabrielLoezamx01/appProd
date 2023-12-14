@@ -18,7 +18,7 @@
                             <img src="img/icon.jpg" class="img-fluid rounded-circle" style="width: 100px; max-width: 100px;">
                         </div>
                         <div v-else class="text-center">
-                            <img :src="'/storage/fotos_perfil/' + usuario.fotodeperfil" class="img-fluid rounded-circle" style="width: 100px; max-width: 100px;">
+                            <img :src="'storage/fotos_perfil/' + usuario.fotodeperfil" class="img-fluid rounded-circle" style="width: 100px; max-width: 100px;">
                         </div>
                         <div class="mb-3">
                             <input name="foto" type="file" accept="image/*" class="borderless-input mt-3" >
