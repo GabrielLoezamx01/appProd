@@ -11,9 +11,9 @@
     @endif
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="css/bts.css">
-    <link rel="stylesheet" href="css/echamelamano.css">
-    <link rel="stylesheet" href="css/Toast.min.css">
+    <link rel="stylesheet" href="{{ asset('css/bts.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/echamelamano.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Toast.min.css') }}">
 
 </head>
 
@@ -39,7 +39,7 @@
                     <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
                         <div class="m-2">
                             <i class="fas fa-user mr-2"></i>
-                            <a class="p-3 xds" href="perfil">Perfil</a>
+                            <a class="p-3 xds" href="perfil">Mi Información</a>
                         </div>
                     </li>
                     <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
@@ -48,6 +48,15 @@
                             <a class="p-3 xds" href="MisPublicaciones">Mis Publicaciones</a>
                         </div>
                     </li>
+                    @if (Auth::user()->role_id == 2)
+                    <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
+                        <div class="m-2">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <a class="p-3 xds" href="{{ url('seller/Myseller') }}">Mis Sucursales</a>
+
+                        </div>
+                    </li>
+                    @endif
                     <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
                         <div class="m-2">
                             <i class="fas fa-sign-out-alt mr-2"></i>
@@ -64,13 +73,15 @@
             @yield('content')
         </main>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-    <script src="js/Toast.min.js"></script>
-    <script src="js/vue.js"></script>
+    <script src="{{ asset('js/Toast.min.js') }}"></script>
+    <script src="{{ asset('js/vue.js') }}"></script>
+
     @stack('scripts')
 </body>
 

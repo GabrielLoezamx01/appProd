@@ -51,6 +51,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('customer')->group(function () {
         require('Cliente/Master.php');
     });
+    Route::prefix('seller')->group(function () {
+        require('Vendedor/Master.php');
+    });
 });
 
 

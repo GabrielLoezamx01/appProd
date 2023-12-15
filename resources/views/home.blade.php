@@ -67,10 +67,18 @@
                             <span class="badge badge-primary text-dark">@{{ item.likes.length }}</span>
                         </div>
                         <div class="col text-center">
-                            <i class="fas fa-star  custom-icon"></i>
+                            <button class="btn">
+                              <i class="fas fa-star  custom-icon"></i>
+                            </button>
+                            <span class="badge badge-primary text-dark"></span>
+
                         </div>
                         <div class="col text-center">
-                            <i class="fas fa-eye  custom-icon"></i>
+                            <button class="btn">
+                                <i class="fas fa-eye  custom-icon"></i>
+
+                            </button>
+                            <span class="badge badge-primary text-dark"></span>
                         </div>
                     </div>
                 </div>

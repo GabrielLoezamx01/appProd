@@ -33,16 +33,9 @@
                             </div>
                             <div class="col text-center">
                                 <button class="btn" data-bs-toggle="modal" href="#exampleModalToggle" @click="showData(item.id)" >
-                                    <i class="fas fa-edit fa-2x custom-icon"></i>
+                                    <i class="fas fa-edit text-info custom-icon"></i>
                                 </button>
                             </div>
-
-                            {{-- <div class="col text-center">
-                                <i class="fas fa-star fa-2x custom-icon"></i>
-                            </div>
-                            <div class="col text-center">
-                                <i class="fas fa-eye fa-2x custom-icon"></i>
-                            </div> --}}
                         </div>
                     </div>
                     <div class="mt-5"></div>
