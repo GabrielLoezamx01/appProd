@@ -1,9 +1,9 @@
 @extends('layouts.dashboard')
 @section('title', 'Mis Publicaciones')
 @section('content')
-    <div class=" mt-5 row d-flex justify-content-center align-items-center "
+    <div class="row d-flex justify-content-center align-items-center "
         style="min-height: 100vh; background-color: #D6DFE4;">
-        <section class="row justify-content-center" style="background-color: #D6DFE4;">
+        <section class="row justify-content-center col-md-6" style="background-color: #D6DFE4;">
             <div v-for='item in Data' class="col-md-12 mt-5">
                 <div class="card-post">
                     <div class="card-header">

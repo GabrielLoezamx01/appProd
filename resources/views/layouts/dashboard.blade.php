@@ -39,15 +39,17 @@
                     <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
                         <div class="m-2">
                             <i class="fas fa-user mr-2"></i>
-                            <a class="p-3 xds" href="perfil">Mi Información</a>
+                            <a class="p-3 xds"  href="{{ url('perfil') }}">Mi Información</a>
                         </div>
                     </li>
+                    @if (Auth::user()->role_id == 1)
                     <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
                         <div class="m-2">
                             <i class="fas fa-book mr-2"></i>
-                            <a class="p-3 xds" href="MisPublicaciones">Mis Publicaciones</a>
+                            <a class="p-3 xds"  href="MisPublicaciones">Mis Publicaciones</a>
                         </div>
                     </li>
+                    @endif
                     @if (Auth::user()->role_id == 2)
                     <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
                         <div class="m-2">

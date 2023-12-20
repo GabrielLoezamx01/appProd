@@ -16,9 +16,11 @@ const app = new Vue({
         Instagram: '',
         X: '',
         Whatsapp: '',
-        Correo: ''
-
-
+        Correo: '',
+        request: {},
+        section2: false,
+        section3: false,
+        section1: true
     },
     mounted() {
         this.getData();
@@ -26,22 +28,60 @@ const app = new Vue({
     methods: {
         getData: function () {
             axios
-            .get(api)
-            .then(response => {
-                if (response.data) {
-                    this.Data = response.data;  // Asigna la respuesta de la API a this.Data
-                }
-            })
-            .catch(error => {
-                console.error('Error al obtener datos:', error);
-            });
+                .get(api)
+                .then(response => {
+                    if (response.data) {
+                        this.Data = response.data;
+
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al obtener datos:', error);
+                });
         },
-        nextSection: function (section){
-            this.valor = 'section' +  section + '-tab';
-            console.log(       this.valor );
-            var tab = new bootstrap.Tab(document.getElementById(this.valor));
-            tab.show();
-            this.valor = '';
+        nextSection: function (section) {
+            if (this.name.trim() === '' || this.info.trim() === '') {
+                alert('Por favor, complete todos los campos obligatorios.');
+            } else {
+                this.section1 = false;
+                this.section2 = true;
+                if(section == 3){
+                    if (this.postal.trim() === '' || this.Dirrecion.trim() === '' || this.estado.trim() === '' || this.ciudad.trim() === '') {
+                        alert('Por favor, complete todos los campos obligatorios.');
+                    }else{
+
+                        this.section2 = false;
+                        this.section3 = true;
+                    }
+                }
+            }
+        },
+        saveSeller: function (){
+            this.request = {
+                'name': this.name,
+                'info': this.info,
+                'postal': this.postal,
+                'Dirrecion': this.Dirrecion,
+                'estado': this.estado,
+                'ciudad': this.ciudad,
+                'Facebook': this.Facebook,
+                'Tiktok': this.Tiktok,
+                'Instagram': this.Instagram,
+                'X': this.X,
+                'Whatsapp': this.Whatsapp,
+                'Correo': this.Correo
+            };
+            axios.post(api, this.request)
+                    .then(response => {
+                        console.log(response);
+                        // new Toast({ message: response.data.message, type: 'success' });
+                            // this.content = '';
+                            // this.selectedCategory = null;
+                    })
+                    .catch(error => {
+                        new Toast({ message: 'Error al hacer la solicitud', type: 'danger' });
+                        console.error('Error al hacer la solicitud POST:', error);
+                    });
         }
     }
 });

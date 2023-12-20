@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 @section('title', 'Bienvenido')
 @section('content')
-    <div class="row">
-        <div class="p-4">
+    <div class="row d-flex align-items-center justify-content-center" style="background-color: #019C04;">
+        <div class="p-4 col-md-7" >
             <div class="search-container">
                 <i class="fas fa-search icon-search"></i>
                 <input type="search" placeholder="Buscar" class="form-search" />
