@@ -32,7 +32,7 @@ const app = new Vue({
                 .then(response => {
                     if (response.data) {
                         this.Data = response.data;
-
+                        console.log(this.Data[0]);
                     }
                 })
                 .catch(error => {
@@ -41,13 +41,13 @@ const app = new Vue({
         },
         nextSection: function (section) {
             if (this.name.trim() === '' || this.info.trim() === '') {
-                alert('Por favor, complete todos los campos obligatorios.');
+                new Toast({ message: 'Por favor, complete todos los campos obligatorios.', type: 'danger' });
             } else {
                 this.section1 = false;
                 this.section2 = true;
                 if(section == 3){
                     if (this.postal.trim() === '' || this.Dirrecion.trim() === '' || this.estado.trim() === '' || this.ciudad.trim() === '') {
-                        alert('Por favor, complete todos los campos obligatorios.');
+                       new Toast({ message: 'Por favor, complete todos los campos obligatorios.', type: 'danger' });
                     }else{
 
                         this.section2 = false;
@@ -73,10 +73,7 @@ const app = new Vue({
             };
             axios.post(api, this.request)
                     .then(response => {
-                        console.log(response);
-                        // new Toast({ message: response.data.message, type: 'success' });
-                            // this.content = '';
-                            // this.selectedCategory = null;
+                        new Toast({ message: response.data.message, type: 'success' });
                     })
                     .catch(error => {
                         new Toast({ message: 'Error al hacer la solicitud', type: 'danger' });

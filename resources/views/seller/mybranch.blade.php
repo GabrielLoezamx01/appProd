@@ -4,12 +4,47 @@
     <div class=" mt-5 row d-flex justify-content-center align-items-center  "
         style="min-height: 100vh; background-color: #D6DFE4;">
         <div v-if="this.Data > 0">
-            @{{this.Data}}
+            @{{ this.Data }}
         </div>
         <div class="col-md-5 m-5">
             <div class="d-md-flex align-items-cente card">
-                <div class="card-body">
-                    <div class="card-body">
+                <div class="card-body" v-if="Data[0]">
+                    <div class="text-end">
+                        <button class="btn btn-login mt-5" style="width: 50%;" data-bs-toggle="modal"
+                            data-bs-target="#myModal"> Crear
+                            Sucursal</button>
+                    </div>
+                    <div>
+                        <div class="p-5">
+                            <h4 class="fw-bold">Mis Sucursales</h4>
+                        </div>
+                        <div v-for="item in Data" class="shadow mt-5">
+                            <div class="row p-5">
+                                <div class="col-md-6 p-3">
+                                    <h5 class="fw-bold">
+                                        @{{ item.nombre }}
+                                    </h5>
+
+                                </div>
+                                <div>
+                                    <button class="btn btn-reset mt-3">
+                                        <i class="fas fa-edit"></i> Información
+                                    </button>
+                                    <button class="btn btn-reset mt-3">
+                                        <i class="fas fa-camera"></i> Fotos
+                                    </button>
+                                    <button class="btn btn-reset mt-3">
+                                        <i class="fas fa-clock"></i> Horarios
+                                    </button>
+                                    <button class="btn btn-reset mt-3">
+                                        <i class="fas fa-map-marker"></i> Dirección
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body" v-if="Data.message">
                         <h1 class="text-center  fw-bold mt-5" v-if="Data.message">
                             @{{ Data.message }}
                         </h1>
