@@ -18,13 +18,12 @@
                         <div class="p-5">
                             <h4 class="fw-bold">Mis Sucursales</h4>
                         </div>
-                        <div v-for="item in Data" class="shadow mt-5">
+                        <div v-for="item in Data" class=" mt-2">
                             <div class="row p-5">
                                 <div class="col-md-6 p-3">
                                     <h5 class="fw-bold">
                                         @{{ item.nombre }}
                                     </h5>
-
                                 </div>
                                 <div>
                                     <button class="btn btn-reset mt-3">
@@ -41,6 +40,7 @@
                                     </button>
                                 </div>
                             </div>
+                            <hr>
                         </div>
                     </div>
 
@@ -127,7 +127,8 @@
                                 <input v-model="Correo" type="email" class="borderless-input mt-3" required>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-login" @click="saveSeller()">Guardar</button>
+                                <button class="btn btn-login" @click="saveSeller()" data-bs-dismiss="modal"
+                                aria-label="Close">Guardar</button>
                             </div>
                         </div>
                     </div>

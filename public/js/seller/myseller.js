@@ -45,10 +45,10 @@ const app = new Vue({
             } else {
                 this.section1 = false;
                 this.section2 = true;
-                if(section == 3){
+                if (section == 3) {
                     if (this.postal.trim() === '' || this.Dirrecion.trim() === '' || this.estado.trim() === '' || this.ciudad.trim() === '') {
-                       new Toast({ message: 'Por favor, complete todos los campos obligatorios.', type: 'danger' });
-                    }else{
+                        new Toast({ message: 'Por favor, complete todos los campos obligatorios.', type: 'danger' });
+                    } else {
 
                         this.section2 = false;
                         this.section3 = true;
@@ -56,7 +56,7 @@ const app = new Vue({
                 }
             }
         },
-        saveSeller: function (){
+        saveSeller: function () {
             this.request = {
                 'name': this.name,
                 'info': this.info,
@@ -72,13 +72,29 @@ const app = new Vue({
                 'Correo': this.Correo
             };
             axios.post(api, this.request)
-                    .then(response => {
-                        new Toast({ message: response.data.message, type: 'success' });
-                    })
-                    .catch(error => {
-                        new Toast({ message: 'Error al hacer la solicitud', type: 'danger' });
-                        console.error('Error al hacer la solicitud POST:', error);
-                    });
+                .then(response => {
+                    this.getData();
+                    this.limpiar();
+                    new Toast({ message: response.data.message, type: 'success' });
+                })
+                .catch(error => {
+                    new Toast({ message: 'Error al hacer la solicitud', type: 'danger' });
+                    console.error('Error al hacer la solicitud POST:', error);
+                });
+        },
+        limpiar: function () {
+            this.name = '';
+            this.info = '';
+            this.postal = '';
+            this.Dirrecion = '';
+            this.estado = '';
+            this.ciudad = '';
+            this.Facebook = '';
+            this.Tiktok = '';
+            this.Instagram = '';
+            this.X = '';
+            this.Whatsapp = '';
+            this.Correo = '';
         }
     }
 });

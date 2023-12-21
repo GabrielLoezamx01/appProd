@@ -37,7 +37,7 @@ class ApiSellerController extends Controller
             'Correo' => 'required|email',
         ]);
         $sucursal = new Sucursal([
-            'nombre' => $request->input('name'),
+            'nombre' => strtoupper($request->input('name')),
             'acerca_de_nosotros' => $request->input('info'),
             'codigo_postal' => $request->input('postal'),
             'direccion' => $request->input('Dirrecion'),
