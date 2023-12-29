@@ -1,6 +1,7 @@
 var id_user = document.querySelector("meta[name='user_id']").getAttribute('content');
-var api = 'ApiUserSeller';
-const app = new Vue({
+var api     = 'ApiUserSeller';
+var apiPost = 'ApiPostSeller';
+const app   = new Vue({
     el: '#app',
     data: {
         Data: [],
@@ -20,7 +21,13 @@ const app = new Vue({
         request: {},
         section2: false,
         section3: false,
-        section1: true
+        section1: true,
+        sectionPost: false,
+        modalTitle: '',
+        selectSucursal: null,
+        content: '',
+        imagen_url: null,
+        imgs: null,
     },
     mounted() {
         this.getData();
@@ -32,11 +39,10 @@ const app = new Vue({
                 .then(response => {
                     if (response.data) {
                         this.Data = response.data;
-                        console.log(this.Data[0]);
                     }
                 })
                 .catch(error => {
-                    console.error('Error al obtener datos:', error);
+                    new Toast({ message: 'No se pudo cargar las sucursales', type: 'danger' });
                 });
         },
         nextSection: function (section) {
@@ -95,6 +101,46 @@ const app = new Vue({
             this.X = '';
             this.Whatsapp = '';
             this.Correo = '';
-        }
+        },
+        newPost: function () {
+            this.section1 = false;
+            this.modalTitle = 'Nueva Publicación';
+            this.sectionPost = true;
+        },
+        crearsucursal (){
+
+        },
+        crearPublicacion: function () {
+            var formData = new FormData();
+            if (this.imgs) {
+                for (let i = 0; i < this.imgs.length; i++) {
+                    formData.append('imgs[]', this.imgs[i]);
+                }
+            }
+            formData.append('contenido', this.content);
+            formData.append('id', this.selectSucursal);
+
+            axios.post(apiPost, formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                },
+              })
+              .then(response => {
+                console.log(response);
+                this.content = '';
+                this.selectSucursal = null;
+                this.imgs = null;
+                new Toast({ message: response.data.message, type: 'success' });
+              })
+              .catch(error => {
+                new Toast({ message: 'Error al hacer la solicitud', type: 'danger' });
+              });
+        },
+        openFileExplorer() {
+            this.$refs.fileInput.click();
+        },
+        handleFileChange(event) {
+            this.imgs = event.target.files;
+        },
     }
 });

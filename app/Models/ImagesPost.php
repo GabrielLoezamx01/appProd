@@ -12,6 +12,8 @@ class ImagesPost extends Model
     protected $fillable = [
         'publicacion_id',
         'ruta',
+        'created_at',
+        'update_at'
     ];
 
     public function publicacion()

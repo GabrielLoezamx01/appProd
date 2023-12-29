@@ -14,6 +14,8 @@ class Post extends Model
         'contenido',
         'fecha_publicacion',
         'me_gusta',
+        'created_at',
+        'update_at'
     ];
 
     public function sucursal()

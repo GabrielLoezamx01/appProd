@@ -411,7 +411,30 @@ hr {
     background-color: #fff;
     color: rgba(0, 0, 0, 0.3);
 }
+.btn-options {
+    background-color: #019C04;
+    border-radius: 80px;
+    color: #FFFFFF;
+    font-size: 12px;
+    padding: 10px;
+}
 
+@media screen and (max-width: 600px) {
+    .btn-options {
+        font-size: 10px;
+        padding: 8px 16px;
+    }
+}
+.color-fotos{
+    background-color: #C37D92;
+}
+.btn-black{
+    background-color: #000000;
+}
+.btn-options:hover{
+    background-color: #018E03;
+    color: #FFFFFF;
+}
 @media screen and (max-width: 500px) {
     /* Agrega tus estilos aquí */
     .imagen-redonda {
