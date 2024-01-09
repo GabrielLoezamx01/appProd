@@ -63,7 +63,7 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $foto               = $request->file('foto');
         $nombreImagen       = time() . '_' . $foto->getClientOriginalName();

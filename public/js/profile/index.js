@@ -14,21 +14,23 @@ const app = new Vue({
             codigopostal: '',
             estado: '',
             ciudad: '',
-            direccion: ''
-        }
+            direccion: '',
+        },
+        images: false
     },
     mounted() {
         this.getUser();
     },
     methods: {
+        showUpdate: function (){
+            this.images = true;
+        },
         getUser: function () {
             axios
             .get(userData)
             .then(response => {
                 if (response.data) {
                     this.usuario = response.data;
-                    console.log(this.usuario);
-                     new Toast({ message: 'Datos cargado con exito', type: 'success' });
                   } else {
                       new Toast({ message: 'Registra tus datos', type: 'warning' });
                   }

@@ -1,8 +1,9 @@
 @extends('layouts.dashboard')
 @section('title', 'Bienvenido')
 @section('content')
+
     <div class="row d-flex align-items-center justify-content-center" style="background-color: #019C04;">
-        <div class="p-4 col-md-7" >
+        <div class="p-4 col-md-7">
             <div class="search-container">
                 <i class="fas fa-search icon-search"></i>
                 <input type="search" placeholder="Buscar" class="form-search" />
@@ -41,8 +42,8 @@
                     </div>
                 </div>
                 <div class="card-body text-start">
-                    <p class="card-text text-info text-dark text-justify m-4" style="font-size: 15px;"> <i class="fas fa-info-circle fa-1x"
-                            style="color: #8FC82D;"></i>
+                    <p class="card-text text-info text-dark text-justify m-4" style="font-size: 15px;"> <i
+                            class="fas fa-info-circle fa-1x" style="color: #8FC82D;"></i>
                         @{{ item.contenido }}</p>
                     <div class="text-start mt-2 m-4">
                         <u class="list-inline">
@@ -68,7 +69,7 @@
                         </div>
                         <div class="col text-center">
                             <button class="btn">
-                              <i class="fas fa-star  custom-icon"></i>
+                                <i class="fas fa-star  custom-icon"></i>
                             </button>
                             <span class="badge badge-primary text-dark"></span>
 
@@ -86,10 +87,13 @@
             </div>
         </div>
     </section>
-    <button @click="abrirModal()" class="btn btn-floating circular-btn"
-        style="position: fixed; bottom: 20px; right: 20px; background-color: #8FC82D;">
-        <i class="fas fa-plus fa-2x text-white"></i>
-    </button>
+    @if (Auth::user()->role_id == 1 )
+        <button @click="abrirModal()" class="btn btn-floating circular-btn"
+            style="position: fixed; bottom: 20px; right: 20px; background-color: #8FC82D;">
+            <i class="fas fa-plus fa-2x text-white"></i>
+        </button>
+    @endif
+
 
     @push('scripts')
         <script src="js/post/index.js"></script>

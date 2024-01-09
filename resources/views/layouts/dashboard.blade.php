@@ -55,7 +55,6 @@
                         <div class="m-2">
                             <i class="fas fa-map-marker-alt mr-2"></i>
                             <a class="p-3 xds" href="{{ url('seller/Myseller') }}">Mis Sucursales</a>
-
                         </div>
                     </li>
                     @endif
@@ -70,7 +69,7 @@
         </div>
     </nav>
 
-    <div id="app" style="   margin-top: 55px; ">
+    <div id="app" style="   margin-top: 70px; ">
         <main class="container-fluid">
             @yield('content')
         </main>
