@@ -29,26 +29,27 @@ class PostSellerController extends Controller
             'id' => 'required|exists:sucursales,id',
             'imgs.*' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        $imagenes = $request->file('imgs');
         $id       = $request->id;
+        $Post = new Post([
+            'sucursal_id' => $id,
+            'contenido'   => nl2br($request->input('contenido')),
+            'fecha_publicacion' => Carbon::now(),
+            'me_gusta'    => 0,
+        ]);
+        $Post->save();
+        $imagenes = $request->file('imgs');
         if ($request->hasFile('imgs')) {
             foreach ($imagenes as $imagen) {
                 $nombreImagen = uniqid('imagen_') . '.' . $imagen->getClientOriginalExtension();
-                Storage::put('publicaciones/sucursales/' . $nombreImagen, file_get_contents($imagen));
+                // $nombreImagen       = time() . '_' . $foto->getClientOriginalName();
+                $ruta               =  $imagen->storeAs('public/publicaciones/sucursales', $nombreImagen);
                 $guardarImagen = new  ImagesPost([
-                    'publicacion_id' => $id  ,
+                    'publicacion_id' => $Post->getAttribute('id'),
                     'ruta'           => $nombreImagen,
                 ]);
                 $guardarImagen -> save();
             }
         }
-        $Post = new Post([
-            'sucursal_id' => $id,
-            'contenido'   => $request->input('contenido'),
-            'fecha_publicacion' => Carbon::now(),
-            'me_gusta'    => 0,
-        ]);
-        $Post->save();
         return response()->json(['message' => '¡Validación exitosa y almacenamiento realizado con éxito!']);
     }
 

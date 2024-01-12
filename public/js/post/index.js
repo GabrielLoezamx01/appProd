@@ -13,12 +13,19 @@ const app = new Vue({
         categories: [],
         selectedCategory: null,
         content: '',
+        imagenExpandida: null
     },
     mounted() {
         this.getPost();
         this.getCategories();
     },
     methods: {
+        mostrarImagenExpandida(img) {
+            this.imagenExpandida = img;
+          },
+          cerrarImagenExpandida() {
+            this.imagenExpandida = null;
+          },
         getPost: function () {
             axios
                 .get(apiPublications)

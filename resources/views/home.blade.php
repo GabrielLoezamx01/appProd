@@ -1,7 +1,9 @@
 @extends('layouts.dashboard')
 @section('title', 'Bienvenido')
 @section('content')
+    <div class="p-4">
 
+    </div>
     <div class="row d-flex align-items-center justify-content-center" style="background-color: #019C04;">
         <div class="p-4 col-md-7">
             <div class="search-container">
@@ -11,6 +13,7 @@
         </div>
     </div>
     @include('home.modalPost')
+
     <section class="row text-center bg-white p-3">
         <div class="col d-flex align-items-center justify-content-center border-hide">
             <button class="text-color2 btn">Publicaciones</button>
@@ -30,7 +33,7 @@
                         </div>
                         <div class="me-md-8 mb-3 mb-md-0">
                             <h2 class="fw-bold text-start text-nombre">@{{ item.sucursal.nombre }}</h2>
-                            <address class="text-start fw-light" itemprop="address" itemscope
+                            <address class="text-start fw-light opacity-50" itemprop="address" itemscope
                                 itemtype="http://schema.org/PostalAddress" style="font-size: 14px;">
                                 <span class="fas fa-map-marker-alt fa-1x" style="color: #8FC82D;"></span>
                                 <span itemprop="streetAddress">@{{ item.sucursal.direccion }}</span>
@@ -42,9 +45,17 @@
                     </div>
                 </div>
                 <div class="card-body text-start">
-                    <p class="card-text text-info text-dark text-justify m-4" style="font-size: 15px;"> <i
-                            class="fas fa-info-circle fa-1x" style="color: #8FC82D;"></i>
-                        @{{ item.contenido }}</p>
+                    <p v-html="item.contenido" class="card-text text-info text-dark text-justify m-4" style="font-size: 15px;">
+                    </p>
+
+
+                    <div class="row d-flex justify-content-start align-items-start">
+                        <div v-for="img in item.images" class="col-md-4 mb-3 text-center">
+                            <img :src="'storage/publicaciones/sucursales/' + img.ruta" class="img-fluid w-75"  @click="mostrarImagenExpandida(img)">
+                        </div>
+                    </div>
+
+                    {{-- <i class="fas fa-info-circle fa-1x" style="color: #8FC82D;"></i> --}}
                     <div class="text-start mt-2 m-4">
                         <u class="list-inline">
                             <li class="list-inline-item rounded-5 mt-2 p-2"
@@ -87,7 +98,7 @@
             </div>
         </div>
     </section>
-    @if (Auth::user()->role_id == 1 )
+    @if (Auth::user()->role_id == 1)
         <button @click="abrirModal()" class="btn btn-floating circular-btn"
             style="position: fixed; bottom: 20px; right: 20px; background-color: #8FC82D;">
             <i class="fas fa-plus fa-2x text-white"></i>

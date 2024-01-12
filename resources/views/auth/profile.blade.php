@@ -13,10 +13,10 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                <form method="POST" action="{{ route('profileIMG') }}" class="text-center m-3 shadow"
+                <form method="POST" action="{{ route('profileIMG') }}" class="text-center m-1"
                     enctype="multipart/form-data" v-if="images" >
                     @csrf
-                    <div class="m-3 p-5" >
+                    <div class="m-2" >
                         <div v-if="usuario.fotodeperfil == null" class="text-center">
                             <img src="img/icon.jpg" class="img-fluid rounded-circle"
                                 style="width: 100px; max-width: 100px;">
@@ -36,8 +36,8 @@
                                 </div>
                             @endif
                             <input name="foto" type="file" accept="image/*" class="borderless-input mt-3">
-                            <button class="btn btn-dark">
-                                Actualizar foto de perfil
+                            <button class="btn btn-dark btn-sm">
+                                Actualizar
                             </button>
                         </div>
                     </div>

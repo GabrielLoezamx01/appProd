@@ -28,6 +28,7 @@ const app   = new Vue({
         content: '',
         imagen_url: null,
         imgs: null,
+        modalsucursal: false
     },
     mounted() {
         this.getData();
@@ -49,6 +50,11 @@ const app   = new Vue({
             if (this.name.trim() === '' || this.info.trim() === '') {
                 new Toast({ message: 'Por favor, complete todos los campos obligatorios.', type: 'danger' });
             } else {
+                if (section == 2) {
+                    this.section1 = true;
+                    this.section2 = false;
+                    return 0;
+                }
                 this.section1 = false;
                 this.section2 = true;
                 if (section == 3) {
@@ -63,6 +69,9 @@ const app   = new Vue({
             }
         },
         saveSeller: function () {
+            if (this.Correo.trim() === '') {
+                new Toast({ message: 'Por favor, complete todos los campos obligatorios.', type: 'danger' });
+            }
             this.request = {
                 'name': this.name,
                 'info': this.info,
@@ -102,13 +111,16 @@ const app   = new Vue({
             this.Whatsapp = '';
             this.Correo = '';
         },
+        cambiarSeccion: function (sucursal, tituloModal, mostrarSectionPost) {
+            this.modalsucursal = sucursal;
+            this.modalTitle = tituloModal;
+            this.sectionPost = mostrarSectionPost;
+        },
         newPost: function () {
-            this.section1 = false;
-            this.modalTitle = 'Nueva Publicación';
-            this.sectionPost = true;
+            this.cambiarSeccion(false, 'Nueva Publicación', true);
         },
         crearsucursal (){
-
+            this.cambiarSeccion(true, 'Crear Sucursal', false);
         },
         crearPublicacion: function () {
             var formData = new FormData();
