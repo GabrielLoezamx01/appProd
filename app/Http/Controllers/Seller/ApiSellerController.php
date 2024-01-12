@@ -17,7 +17,7 @@ class ApiSellerController extends Controller
         $seller = Sucursal::where('usuario_id', Auth::id())->get();
         if (count($seller)) {
             return $seller;
-        }else{
+        } else {
             return response()->json(['message' => 'Sin Sucursales Registradas'], 201);
         }
     }
@@ -61,7 +61,9 @@ class ApiSellerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Sucursal::where('usuario_id', Auth::id())
+            ->where('id', $id)
+            ->first();
     }
 
     /**
@@ -69,7 +71,12 @@ class ApiSellerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return match ($request['section']) {
+            1 => $this->updateRedes($request->all(), $id),
+            2 => $this->ClockSellerGateway($request->all(), $id),
+            3 => $this->DataSeller($request->all(), $id),
+            default => ['error' => 'Ocurrio un error en la section']
+        };
     }
 
     /**
@@ -78,5 +85,95 @@ class ApiSellerController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+
+    private function updateRedes(array $request, string  $id)
+    {
+        $seller  = Sucursal::where('usuario_id', Auth::id())->where('id', $id)->first();
+        if ($seller) {
+            $req  = $this->requestUpdateRedes($request);
+            $seller->update($req);
+            return response()->json(['message' => 'La sucursal se actualizó correctamente']);
+        }
+        return response()->json(['message' => 'La sucursal no se encontró o no tienes permiso para actualizarla'], 404);
+    }
+    private function DataSeller(array $request, string  $id)
+    {
+    }
+
+
+    private function ClockSellerGateway(array $request, string $id)
+    {
+        $seller  = Sucursal::where('usuario_id', Auth::id())->where('id', $id)->first();
+        if ($seller) {
+            $req = match ($request['type']) {
+                'on' =>  $this->requestClockOn($request['id'], $request['value']),
+                'off' => $this->requestClockOff($request['id'], $request['value']),
+                default => ['error' => 'Ocurrio un error en la section']
+            };
+            $seller->update($req);
+            return response()->json(['message' => 'La sucursal se actualizó correctamente']);
+        }
+        return response()->json(['message' => 'La sucursal no se encontró o no tienes permiso para actualizarla'], 404);
+    }
+
+    private function requestUpdateRedes(array $request)
+    {
+        return [
+            'facebook'  => $request['Facebook'],
+            'tiktok'    => $request['Tiktok'],
+            'instagram' => $request['Instagram'],
+            'twitter'   => $request['X'],
+            'whatsapp'  => $request['Whatsapp'],
+            'correo'    => $request['Correo'],
+        ];
+    }
+    private function requestClockOn($day, $time)
+    {
+        $formatOnDays =  [
+            '1' => 'lunes_inicio',
+            '2' => 'martes_inicio',
+            '3' => 'miercoles_inicio',
+            '4' => 'jueves_inicio',
+            '5' => 'viernes_inicio',
+            '6' => 'sabado_inicio',
+            '7' => 'domingo_inicio',
+        ];
+        $requestDays = $formatOnDays[$day];
+        return [
+            $requestDays => $time
+        ];
+    }
+
+    private function requestClockOff($day, $time)
+    {
+        $formatOnDays =  [
+            '1' => 'lunes_fin',
+            '2' => 'martes_fin',
+            '3' => 'miercoles_fin',
+            '4' => 'jueves_fin',
+            '5' => 'viernes_fin',
+            '6' => 'sabado_fin',
+            '7' => 'domingo_fin',
+        ];
+        $requestDays = $formatOnDays[$day];
+        return [
+            $requestDays => $time
+        ];
+    }
+
+    private function requestDataSeller(array $request)
+    {
+        return  [
+            'nombre'            => $request['nombre'],
+            'direccion'         => $request['direccion'],
+            'codigo_postal'     => $request['codigo_postal'],
+            'imagen_url'        => $request['imagen_url'],
+            'img_portada'       => $request['img_portada'],
+            'estado'            => $request['estado'],
+            'acerca_de_nosotros' => $request['acerca_de_nosotros'],
+            'ciudad'            => $request['ciudad'],
+        ];
     }
 }

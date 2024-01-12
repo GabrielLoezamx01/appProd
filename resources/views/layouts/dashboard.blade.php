@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="{{ asset('css/bts.css') }}">
     <link rel="stylesheet" href="{{ asset('css/echamelamano.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Toast.min.css') }}">
-
+    <link href="{{ asset('css/hover-min.css') }}" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="all">
 </head>
 
 <body>
@@ -69,7 +70,7 @@
         </div>
     </nav>
 
-    <div id="app" style="   margin-top: 70px; ">
+    <div id="app" style="   margin-top: 6px; ">
         <main class="container-fluid">
             @yield('content')
         </main>
