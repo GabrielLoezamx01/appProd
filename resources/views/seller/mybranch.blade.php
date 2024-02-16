@@ -3,13 +3,12 @@
 @section('content')
     <div class=" mt-5 row d-flex justify-content-center align-items-center  "
         style="min-height: 100vh; background-color: #D6DFE4;">
-        <div v-if="this.Data > 0">
+        <div v-if="Data.length > 0">
             @{{ this.Data }}
         </div>
         <div class="col-md-5 m-5">
             <div class="d-md-flex align-items-cente card">
-
-                <div class="card-body" v-if="Data[0]">
+                <div class="card-body" v-if="Data.length == 0">
                     <div class="p-3">
                         <div class="search-container shadow-2 " style="background-color: #F3F3F7">
                             <i class="fas fa-search icon-search"></i>

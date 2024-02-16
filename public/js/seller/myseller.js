@@ -38,8 +38,10 @@ const app   = new Vue({
             axios
                 .get(api)
                 .then(response => {
-                    if (response.data) {
+                    if (response.data.length > 0) {
                         this.Data = response.data;
+                    }else{
+                        this.Data = 'No hay registros';
                     }
                 })
                 .catch(error => {

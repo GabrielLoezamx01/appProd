@@ -18,7 +18,7 @@ class ApiSellerController extends Controller
         if (count($seller)) {
             return $seller;
         } else {
-            return response()->json(['message' => 'Sin Sucursales Registradas'], 201);
+            return [];
         }
     }
 
