@@ -11,8 +11,8 @@
     <meta name="robots" content="index, follow">
     <meta name="keywords" content="iniciar sesión, acceso, cuenta, seguridad, echamelamano, Echame La Mano">
     <title>@yield('title')</title>
-    <link rel="stylesheet" href="{{ secure_asset('css/bts.css') }}">
-    <link rel="stylesheet" href="{{ secure_asset('css/echamelamano.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bts.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/echamelamano.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 </head>
