@@ -8,11 +8,7 @@
         </div>
         <div class="col-md-5 m-5">
             <div class="d-md-flex align-items-cente card">
-                <div>
-                    <H1>
-                        HOLA MUNDO
-                    </H1>
-                </div>
+
                 <div class="card-body" v-if="Data[0]">
                     <div class="p-3">
                         <div class="search-container shadow-2 " style="background-color: #F3F3F7">
