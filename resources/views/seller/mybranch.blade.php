@@ -4,7 +4,30 @@
     <div class=" mt-5 row d-flex justify-content-center align-items-center  "
         style="min-height: 100vh; background-color: #D6DFE4;">
         <div v-if="Data.length > 0">
-            @{{ this.Data }}
+            <div v-for="item in Data" class="mt-5 p-3" style="background-color: #f3f3f744;" :key="item.id">
+                <div class="row">
+                    <div class="col-md-4">
+                        {{-- <img src="img/icon.jpg" class="img-fluid rounded-circle" :alt="item.sucursal.nombre"
+                        v-if="item.sucursal.imagen_url == null" style="width: 100px; max-width: 100px;"> --}}
+                        <img src="{{ asset('img/icon.jpg') }}" class="img-fluid" v-if="imagen_url == null">
+                        <img :src="'img/sucursales/' + item.imagen_url" class="img-fluid" v-else>
+
+                    </div>
+                    <div class="col-md-8">
+                        <h2 class="fs-2 mt-3 fw-bold">
+                            @{{ item.nombre }}
+                        </h2>
+                        <p class="fw-light ">
+                            @{{ item.acerca_de_nosotros }}
+                        </p>
+                        <a :href="'/seller/ShowSeller/' + item.id">
+                            <button class="btn btn-options mt-3 btn-black">
+                                <i class="fas fa-cogs"></i> Ajustes
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-5 m-5">
             <div class="d-md-flex align-items-cente card">
