@@ -8,7 +8,7 @@ use App\Models\Post;
 use App\Models\ImagesPost;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
-
+use App\Tools\ResponseApi as Api;
 class PostSellerController extends Controller
 {
     /**
@@ -18,39 +18,42 @@ class PostSellerController extends Controller
     {
         //
     }
-
+    private function requestStore(){
+        return [
+            'contenido' => 'required|string',
+            'id'        => 'required|exists:sucursales,id',
+            'imgs.*'    => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ];
+    }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'contenido' => 'required|string',
-            'id' => 'required|exists:sucursales,id',
-            'imgs.*' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-        $id       = $request->id;
-        $Post = new Post([
-            'sucursal_id' => $id,
-            'contenido'   => nl2br($request->input('contenido')),
+        $request  -> validate( $this -> requestStore() );
+        $id         = $request->id;
+        $dataInsert = [
+            'sucursal_id'       => $id,
+            'contenido'         => nl2br($request->input('contenido')),
             'fecha_publicacion' => Carbon::now(),
-            'me_gusta'    => 0,
-        ]);
-        $Post->save();
+            'me_gusta'          => 0,
+        ];
+        $Post = new Post( $dataInsert );
+        $Post -> save();
         $imagenes = $request->file('imgs');
         if ($request->hasFile('imgs')) {
             foreach ($imagenes as $imagen) {
                 $nombreImagen = uniqid('imagen_') . '.' . $imagen->getClientOriginalExtension();
                 // $nombreImagen       = time() . '_' . $foto->getClientOriginalName();
-                $ruta               =  $imagen->storeAs('public/publicaciones/sucursales', $nombreImagen);
-                $guardarImagen = new  ImagesPost([
+                $ruta                =  $imagen->storeAs('public/publicaciones/sucursales', $nombreImagen);
+                $guardarImagen       = new  ImagesPost([
                     'publicacion_id' => $Post->getAttribute('id'),
                     'ruta'           => $nombreImagen,
                 ]);
                 $guardarImagen -> save();
             }
         }
-        return response()->json(['message' => '¡Validación exitosa y almacenamiento realizado con éxito!']);
+       return  Api::success([] , '¡Validación exitosa y almacenamiento realizado con éxito!');
     }
 
     /**

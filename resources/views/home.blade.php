@@ -1,11 +1,9 @@
 @extends('layouts.dashboard')
 @section('title', 'Bienvenido')
 @section('content')
-    <div class="p-4">
-
-    </div>
+    <div class="p-4"></div>
     <div class="row d-flex align-items-center justify-content-center" style="background-color: #019C04;">
-        <div class="p-4 col-md-7">
+        <div class="p-4 col-md-7 mt-5">
             <div class="search-container">
                 <i class="fas fa-search icon-search"></i>
                 <input type="search" placeholder="Buscar" class="form-search" />
@@ -13,7 +11,6 @@
         </div>
     </div>
     @include('home.modalPost')
-
     <section class="row text-center bg-white p-3">
         <div class="col d-flex align-items-center justify-content-center border-hide">
             <button class="text-color2 btn">Publicaciones</button>
