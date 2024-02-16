@@ -19,7 +19,12 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
+/*
+*
+* Para visualizar los errores de una manera mas eficiente...
+*/
 
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
 
 Auth::routes();

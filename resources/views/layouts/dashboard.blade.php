@@ -34,7 +34,7 @@
                     <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
                         <div class="m-2">
                             <i class="fas fa-home mr-2"></i>
-                            <a class="p-3 xds" href="/home">Inicio</a>
+                            <a class="p-3 xds" href="{{ url('home') }}">Inicio</a>
                         </div>
                     </li>
                     <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
