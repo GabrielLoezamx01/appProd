@@ -94,6 +94,9 @@ const app = new Vue({
             .then(response => {
               new Toast({ message: 'Actualizado', type: 'success' });
             })
+        },
+        comments: function (id){
+            window.location.href = 'customer/comments/' + id;
         }
     }
 });
