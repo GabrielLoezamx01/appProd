@@ -13,8 +13,14 @@ class PublicacionesClientes extends Model
     {
         return $this->belongsTo(Categoria::class, 'categoria_id');
     }
+
     public function usuario()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+    public function data()
+    {
+        return $this->belongsTo(DataUsers::class, 'user_id');
+
     }
 }

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('css/Toast.min.css') }}">
     <link href="{{ asset('css/hover-min.css') }}" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 
 <body>
@@ -47,7 +48,7 @@
                     <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
                         <div class="m-2">
                             <i class="fas fa-book mr-2"></i>
-                            <a class="p-3 xds"  href="MisPublicaciones">Mis Publicaciones</a>
+                            <a class="p-3 xds"  href="{{ url('MisPublicaciones') }}" >Mis Publicaciones</a>
                         </div>
                     </li>
                     @endif

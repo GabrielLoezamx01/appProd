@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Comments;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CommentsClients;
+use App\Models\PublicacionesClientes;
 
 class ClientsController extends Controller
 {
@@ -30,14 +31,18 @@ class ClientsController extends Controller
      */
     public function show(string $id)
     {
-        $comments = CommentsClients::where('idpost', $id)
-        ->join('data_users', 'comments_clients.id_user', '=', 'data_users.id')
-        ->select('comments_clients.*', 'data_users.nombres', 'data_users.apellidos', 'data_users.fotodeperfil')
-        ->get();
-        if ($comments->isEmpty()) {
-            return response()->json(['message' => 'No records found for this post ID'], 404);
+
+        $post =  PublicacionesClientes::where('id',$id)->with('categoria','data')->get();
+        if(count($post)){
+            $comments = CommentsClients::where('idpost', $id)
+            ->with('data')
+            ->get();
+            if ($comments->isEmpty()) {
+                return response()->json(['message' => 'No records found for this post ID'], 404);
+            }
+            return response()->json(['post' => $post, 'comments' => $comments]);
         }
-        return $comments;
+        return response()->json(['message' => 'No records found for this post ID'], 404);
     }
 
     /**
