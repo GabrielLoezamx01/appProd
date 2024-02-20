@@ -13,12 +13,11 @@ class CommentsClients extends Model
 
     public function post()
     {
-        return $this->belongsTo(User::class, 'idpost');
-
+        return $this->belongsTo(PublicacionesClientes::class, 'idpost');
     }
 
-    public function users()
+    public function data()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(DataUsers::class, 'id_user');
     }
 }
