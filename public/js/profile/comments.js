@@ -9,13 +9,22 @@ const app = new Vue({
         comments: [],
         loading: true,
         msg: 0,
-        idU: 0
+        idU: 0,
+        pagination: 0,
+        next: false,
+        back: false,
+        redis: []
     },
     mounted() {
         this.getData();
     },
     methods: {
         getData: function (page = 1) {
+            this.pagination = page;
+            if(this.pagination > 1){
+                this.redis = this.comments;
+            }
+
             var id = window.location.pathname.split('/').pop();
             axios
                 .get(api + '/' + id, {
@@ -26,18 +35,36 @@ const app = new Vue({
                         this.post = response.data.post;
                         if(this.post.length > 0){
                             this.idU = response.data.post[0].user_id;
-                            this.comments = response.data.comments;
+                            this.comments = response.data.comments.data;
+                            if(this.comments.length == 0){
+                                if(this.redis.length > 0){
+                                    this.next = false;
+                                    this.back = true;
+                                    this.comments = this.redis;
+                                }
+                            }else{
+                                this.next = true;
+                            }
+
                             this.loading = false;
                         }else{
                             this.loading = false;
                             this.msg = 1;
                         }
-
+                        if(this.pagination == 1){
+                            this.back = false;
+                        }
                     }
                 })
                 .catch(error => {
                     console.error('Error al obtener datos:', error);
                 });
+        },
+        nextComments: function () {
+            this.getData(this.pagination + 1);
+        },
+        backComments: function () {
+            this.getData(this.pagination - 1);
         },
         Hashtags: function (texto) {
             const regex = /#(\w+)/g;
