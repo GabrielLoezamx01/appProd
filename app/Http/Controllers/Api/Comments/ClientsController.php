@@ -34,12 +34,7 @@ class ClientsController extends Controller
 
         $post =  PublicacionesClientes::where('id',$id)->with('categoria','data')->get();
         if(count($post)){
-            $comments = CommentsClients::where('idpost', $id)
-            ->with('data')
-            ->get();
-            if ($comments->isEmpty()) {
-                return response()->json(['message' => 'No records found for this post ID'], 404);
-            }
+            $comments = CommentsClients::with('data')->where('idpost', $id)->orderBy('created_at', 'desc')->paginate(3);
             return response()->json(['post' => $post, 'comments' => $comments]);
         }
         return response()->json(['message' => 'No records found for this post ID'], 404);
