@@ -1,7 +1,6 @@
 var id_user = document.querySelector("meta[name='user_id']").getAttribute('content');
 var api = 'ApiCommentsClients';
 var apiCategories = 'categorias';
-
 const app = new Vue({
     el: '#app',
     data: {
@@ -13,7 +12,11 @@ const app = new Vue({
         pagination: 0,
         next: false,
         back: false,
-        redis: []
+        redis: [],
+        redis2: [],
+
+        commentContent: '',
+        comentshow: false,
     },
     mounted() {
         this.getData();
@@ -72,6 +75,53 @@ const app = new Vue({
             const textoResaltado1 = '<i class="fas fa-info-circle fa-1x " style="color: #8FC82D;"></i>' + textoResaltado;
             return textoResaltado1;
         },
+        comentarpost: function () {
+            this.comentshow = true;
+        },
+        insertcomment: function(){
+            var request = {
+                idpost: this.post[0].id,
+                content: this.commentContent
+            };
+            axios
+            .post(api , request)
+            .then(response => {
+                this.getData(1);
+                this.comentshow = false;
+                this.commentContent = '';
+                new Toast({ message: 'Comentario Agregado', type: 'success' });
+            })
+            .catch(error => {
+                new Toast({ message: 'Error al hacer la solicitud', type: 'danger' });
+                console.error('Error al hacer la solicitud POST:', error);
+            });
+        },
+        cerrarComentario: function() {
+            this.comentshow = false;
+            this.loading = true;
+            this.getData( this.pagination);
+        },
+        formatDate(date) {
+            const now = moment(); // Obtener la fecha y hora actual
+            const commentDate = moment(date);
+            const diffInMinutes = now.diff(commentDate, 'minutes');
+            const intervals = {
+                year: 'año',
+                month: 'mes',
+                week: 'semana',
+                day: 'día',
+                hour: 'hora',
+                minute: 'minuto'
+            };
+            for (let interval in intervals) {
+                const value = Math.floor(now.diff(commentDate, interval, true));
+                if (value >= 1) {
+                    const plural = value !== 1 ? 's' : '';
+                    return `hace ${value} ${intervals[interval]}${plural}`;
+                }
+            }
+            return 'hace unos momentos'
+          }
     }
 });
 
