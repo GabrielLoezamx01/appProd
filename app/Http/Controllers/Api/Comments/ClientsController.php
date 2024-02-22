@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CommentsClients;
 use App\Models\PublicacionesClientes;
+use Illuminate\Support\Facades\Auth;
 
 class ClientsController extends Controller
 {
@@ -22,8 +23,12 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validateRequest($request->all());
-        return CommentsClients::create($request->all());
+        $items = [
+            'idpost'  => $request->idpost,
+            'id_user' => Auth::user()->id,
+            'content' => $request->content,
+        ];
+        return CommentsClients::create( $items );
     }
 
     /**
@@ -34,7 +39,7 @@ class ClientsController extends Controller
 
         $post =  PublicacionesClientes::where('id',$id)->with('categoria','data')->get();
         if(count($post)){
-            $comments = CommentsClients::with('data')->where('idpost', $id)->orderBy('created_at', 'desc')->paginate(3);
+            $comments = CommentsClients::with('data')->where('idpost', $id)->orderBy('created_at', 'asc')->paginate(4);
             return response()->json(['post' => $post, 'comments' => $comments]);
         }
         return response()->json(['message' => 'No records found for this post ID'], 404);
@@ -45,9 +50,13 @@ class ClientsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $this->validateRequest($request->all());
+        $items = [
+            'idpost'  => $id,
+            'id_user' => Auth::user()->id,
+            'content' => $request->content,
+        ];
         $comment = CommentsClients::find($id);
-        $comment->update($request->all());
+        $comment->update($items);
         return $comment;
     }
 
