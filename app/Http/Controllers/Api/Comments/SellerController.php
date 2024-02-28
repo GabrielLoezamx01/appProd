@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Comments;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
+
 class SellerController extends Controller
 {
     /**
@@ -21,23 +25,34 @@ class SellerController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validateRequest($request->all());
-        return Comments::create($request->all());
+        $validated = $request->validate([
+            'idpost'  => 'required',
+            'content' => 'required',
+        ]);
+        $items = [
+            'idpost'  => $request->idpost,
+            'id_user' => Auth::user()->id,
+            'content' => $request->content,
+        ];
+        return Comments::create($items);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Comments $comments, string $id)
     {
-        $comments = Comments::where('idpost', $id)
-        ->join('data_users', 'comments_seller.id_user', '=', 'data_users.id')
-        ->select('comments_clients.*', 'data_users.nombres', 'data_users.apellidos', 'data_users.fotodeperfil')
-        ->get();
-        if ($comments->isEmpty()) {
+        try {
+            $post =  Post::where('id',$id)->with('sucursal', 'images')->get();
+            if(count($post)){
+                $comments = $comments::with('user.data')->where('idpost', $id)->orderBy('created_at', 'asc')->paginate(4);
+                 return response()->json(['post' => $post, 'comments' => $comments]);
+            }
+        } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'No records found for this post ID'], 404);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'An error occurred while retrieving the comments'], 500);
         }
-        return $comments;
     }
 
     /**
@@ -68,7 +83,16 @@ class SellerController extends Controller
         return request()->validate([
             'idpost' => 'required',
             'content' => 'required',
-            'id_user' => 'required|exists:users,id'
         ]);
+    }
+
+
+
+    private function getCommentsData(Comments $comments, string $id)
+    {
+        return $comments->where('idpost', $id)
+            ->join('data_users', 'comments_seller.id_user', '=', 'data_users.id')
+            ->select('comments_clients.*', 'data_users.nombres', 'data_users.apellidos', 'data_users.fotodeperfil')
+            ->get();
     }
 }

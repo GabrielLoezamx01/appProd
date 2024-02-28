@@ -17,6 +17,7 @@
     <link href="{{ asset('css/hover-min.css') }}" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    @stack('styles')
 </head>
 
 <body>
@@ -29,7 +30,7 @@
                     <i class="fas fa-bars"></i>
                 </div>
             </button>
-            <a class="navbar-brand" href="#">Mi Sitio</a>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
@@ -44,12 +45,20 @@
                             <a class="p-3 xds"  href="{{ url('perfil') }}">Mi Información</a>
                         </div>
                     </li>
+
                     @if (Auth::user()->role_id == 1)
                     <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
                         <div class="m-2">
                             <i class="fas fa-book mr-2"></i>
                             <a class="p-3 xds"  href="{{ url('MisPublicaciones') }}" >Mis Publicaciones</a>
                         </div>
+                    </li>
+                    <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
+                        <div class="m-2">
+                            <i class="fas fa-share-alt mr-2"></i><!-- Cambiado de "fa-shared" a "fa-share-alt" -->
+                            <a class="p-3 xds" href="{{ url('PublicacionesCompartidas') }}"> Mis Compartidos</a>
+                        </div>
+
                     </li>
                     @endif
                     @if (Auth::user()->role_id == 2)
@@ -60,18 +69,25 @@
                         </div>
                     </li>
                     @endif
-                    <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
-                        <div class="m-2">
-                            <i class="fas fa-sign-out-alt mr-2"></i>
-                            <a class="p-3 xds" href="{{ url('closeUser') }}">Cerrar Sesión</a>
-                        </div>
-                    </li>
+                </ul>
+            </div>
+
+            <div class="dropdown ms-auto p-3">
+                <a class="navbar-brand fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ Auth::user()->name ?? 'Actualizar Información' }}
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item nav-bg" href="#">Ajustes</a></li>
+                    <li><a class="dropdown-item nav-bg" href="{{ url('closeUser') }}">Cerrar Sesión</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div id="app" style="   margin-top: 6px; ">
+
+
+    <div id="app" style="   margin-top: 6px; " >
         <main class="container-fluid">
             @yield('content')
         </main>

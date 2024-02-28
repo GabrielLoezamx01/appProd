@@ -46,6 +46,8 @@ class ProfileController extends Controller
             $validatedData['user_id'] = Auth::id();
             DataUsers::create($validatedData);
         }
+        $user = Auth::user(); // Obtener el usuario autenticado
+        $user->update(['name' => $validatedData['nombres'] .' '. $validatedData['apellidos']]);
         return response()->json(['message' => 'Datos almacenados con éxito'], 200);
     }
 

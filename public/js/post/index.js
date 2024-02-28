@@ -1,5 +1,7 @@
 var apiPublications = '/customer/Publications';
 var apiLikes = 'customer/Likes_Publications/';
+var apiShared = 'customer/sharedPost';
+
 var apiPublicationsClients = 'customer/ClientsPublications';
 var id_user = document.querySelector("meta[name='user_id']").getAttribute('content');
 var apiCategories = 'categorias';
@@ -13,15 +15,19 @@ const app = new Vue({
         categories: [],
         selectedCategory: null,
         content: '',
-        imagenExpandida: null
+        likebutton: true,
+        imagenExpandida: ''
     },
     mounted() {
         this.getPost();
         this.getCategories();
     },
     methods: {
+
         mostrarImagenExpandida(img) {
-            this.imagenExpandida = img;
+            this.imagenExpandida = img.ruta;
+            var myModal = new bootstrap.Modal(document.getElementById('imagenExpandidaModal'));
+            myModal.show();
           },
           cerrarImagenExpandida() {
             this.imagenExpandida = null;
@@ -43,13 +49,13 @@ const app = new Vue({
             const valor = item.likes.some(like => like.user_id === +id_user);
             return valor;
         },
-        toggleLike: function (item) {
+        toggleLike: function (item , index  ) {
             if (this.isUserLiked(item)) {
                 const url = apiLikes + item.id;
                 axios.delete(url)
                     .then(response => {
                         this.getPost();
-                        this.isUserLiked();
+                        item.likebutton = !item.likebutton;
                     })
                     .catch(error => {
                         console.error('Error en la solicitud DELETE:', error);
@@ -87,6 +93,20 @@ const app = new Vue({
         abrirModal: function () {
             var miModal = new bootstrap.Modal(document.getElementById('miModal'));
             miModal.show();
+        },
+        shared: function(id){
+            const body = {
+                'id_post': id
+            };
+            axios.post(apiShared, body)
+                .then(response => {
+                    if (response.status === 200) {
+                        new Toast({ message: 'Compartido', type: 'success' });
+                    }
+                })
+                .catch(error => {
+                    new Toast({ message: 'Error al hacer la solicitud, verifica los datos antes de publicar', type: 'danger' });
+                });
         }
     }
 });
