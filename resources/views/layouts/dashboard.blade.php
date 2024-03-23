@@ -10,13 +10,14 @@
         <meta name="user_id" content="{{ Auth::user()->id }}" />
     @endif
     <title>@yield('title')</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/bts.css') }}">
     <link rel="stylesheet" href="{{ asset('css/echamelamano.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Toast.min.css') }}">
-    <link href="{{ asset('css/hover-min.css') }}" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    {{-- <link rel="stylesheet" href="{{ asset('css/awesome.css') }}"> --}}
+    <link  rel="stylesheet" href="{{ asset('css/hover-min.css') }}">
+    <link rel="stylesheet"  href="{{ asset('css/animate.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
     @stack('styles')
 </head>
 
@@ -42,38 +43,39 @@
                     <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
                         <div class="m-2">
                             <i class="fas fa-user mr-2"></i>
-                            <a class="p-3 xds"  href="{{ url('perfil') }}">Mi Información</a>
+                            <a class="p-3 xds" href="{{ url('perfil') }}">Mi Información</a>
                         </div>
                     </li>
 
                     @if (Auth::user()->role_id == 1)
-                    <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
-                        <div class="m-2">
-                            <i class="fas fa-book mr-2"></i>
-                            <a class="p-3 xds"  href="{{ url('MisPublicaciones') }}" >Mis Publicaciones</a>
-                        </div>
-                    </li>
-                    <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
-                        <div class="m-2">
-                            <i class="fas fa-share-alt mr-2"></i><!-- Cambiado de "fa-shared" a "fa-share-alt" -->
-                            <a class="p-3 xds" href="{{ url('PublicacionesCompartidas') }}"> Mis Compartidos</a>
-                        </div>
+                        <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
+                            <div class="m-2">
+                                <i class="fas fa-book mr-2"></i>
+                                <a class="p-3 xds" href="{{ url('MisPublicaciones') }}">Mis Publicaciones</a>
+                            </div>
+                        </li>
+                        <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
+                            <div class="m-2">
+                                <i class="fas fa-share-alt mr-2"></i><!-- Cambiado de "fa-shared" a "fa-share-alt" -->
+                                <a class="p-3 xds" href="{{ url('PublicacionesCompartidas') }}"> Mis Compartidos</a>
+                            </div>
 
-                    </li>
+                        </li>
                     @endif
                     @if (Auth::user()->role_id == 2)
-                    <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
-                        <div class="m-2">
-                            <i class="fas fa-map-marker-alt mr-2"></i>
-                            <a class="p-3 xds" href="{{ url('seller/Myseller') }}">Mis Sucursales</a>
-                        </div>
-                    </li>
+                        <li class="nav-item d-flex align-items-center nav-bg m-3 rounded-3">
+                            <div class="m-2">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                <a class="p-3 xds" href="{{ url('seller/Myseller') }}">Mis Sucursales</a>
+                            </div>
+                        </li>
                     @endif
                 </ul>
             </div>
 
             <div class="dropdown ms-auto p-3">
-                <a class="navbar-brand fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="navbar-brand fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     {{ Auth::user()->name ?? 'Actualizar Información' }}
                 </a>
 
@@ -85,19 +87,15 @@
         </div>
     </nav>
 
-
-
-    <div id="app" style="   margin-top: 6px; " >
+    <div id="app" style="margin-top: 6rem;">
         <main class="container-fluid">
             @yield('content')
         </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script> --}}
+    <script src="{{ asset('js/axios_cached.js') }}"></script>
     <script src="{{ asset('js/Toast.min.js') }}"></script>
     <script src="{{ asset('js/vue.js') }}"></script>
 

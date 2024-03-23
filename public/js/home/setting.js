@@ -1,29 +1,32 @@
-var apiPublications = '/customer/Publications';
-var apiLikes = 'customer/Likes_Publications/';
-var apiShared = 'customer/sharedPost';
+// var apiPublications = "/customer/Publications";
+// var apiLikes = "customer/Likes_Publications/";
+// var apiShared = "customer/sharedPost";
 
-var apiPublicationsClients = 'customer/ClientsPublications';
-var id_user = document.querySelector("meta[name='user_id']").getAttribute('content');
-var apiCategories = 'categorias';
+// var apiPublicationsClients = "customer/ClientsPublications";
+// var id_user = document
+//     .querySelector("meta[name='user_id']")
+//     .getAttribute("content");
+var apiCategories = "categorias";
 
 const app = new Vue({
-    el: '#app',
+    el: "#app",
     data: {
-        conectado: true,
-        items: [],
-        showAll: false,
+        vue: true,
         categories: [],
-        selectedCategory: null,
-        content: '',
-        likebutton: true,
-        imagenExpandida: ''
     },
     mounted() {
-        this.getPost();
+        // this.getPost();
         this.getCategories();
     },
     methods: {
-
+        getCategories: function () {
+            axios
+                .get(apiCategories)
+                .then((response) => (this.categories = response.data));
+        },
+        showCategorie: function (id) {
+            alert(id);
+        }
         // mostrarImagenExpandida(img) {
         //     this.imagenExpandida = img.ruta;
         //     var myModal = new bootstrap.Modal(document.getElementById('imagenExpandidaModal'));
@@ -32,16 +35,12 @@ const app = new Vue({
         //   cerrarImagenExpandida() {
         //     this.imagenExpandida = null;
         //   },
-        getPost: function () {
-            axios
-                .get(apiPublications)
-                .then(response => (this.items = response.data))
-        },
-        getCategories: function () {
-            axios
-                .get(apiCategories)
-                .then(response => (this.categories = response.data))
-        }
+        // getPost: function () {
+        //     axios
+        //         .get(apiPublications)
+        //         .then((response) => (this.items = response.data));
+        // },
+
         // showAllTags: function (item) {
         //     this.showAll = true;
         // },
@@ -108,5 +107,5 @@ const app = new Vue({
         //             new Toast({ message: 'Error al hacer la solicitud, verifica los datos antes de publicar', type: 'danger' });
         //         });
         // }
-    }
+    },
 });
