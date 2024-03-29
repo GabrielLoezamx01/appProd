@@ -6,6 +6,8 @@ use App\Http\Controllers\Categorias\CategoriasController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ResetPassword;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Api\Home\SearchController;
+
 
 
 /*
@@ -45,6 +47,8 @@ Route::get('closeUser', [LoginController::class, 'logout'])->name('closeUser');
 Route::middleware(['auth'])->group(function () {
     Route::apiResource('categorias', CategoriasController::class);
     Route::apiResource('profile', ProfileController::class);
+    Route::apiResource('search_branch', SearchController::class);
+
     Route::post('profileIMG', [ProfileController::class, 'update'])->name('profileIMG');
 
     Route::view('perfil','auth.profile');

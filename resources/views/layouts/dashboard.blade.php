@@ -14,11 +14,13 @@
     <link rel="stylesheet" href="{{ asset('css/echamelamano.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Toast.min.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('css/awesome.css') }}"> --}}
-    <link  rel="stylesheet" href="{{ asset('css/hover-min.css') }}">
-    <link rel="stylesheet"  href="{{ asset('css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/hover-min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
     @stack('styles')
+
 </head>
 
 <body>
@@ -88,17 +90,17 @@
     </nav>
 
     <div id="app" style="margin-top: 6rem;">
-        <main class="container-fluid">
+        <main class="">
             @yield('content')
         </main>
     </div>
-
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script> --}}
+
     <script src="{{ asset('js/axios_cached.js') }}"></script>
     <script src="{{ asset('js/Toast.min.js') }}"></script>
     <script src="{{ asset('js/vue.js') }}"></script>
-
+    <script src="https://owlcarousel2.github.io/OwlCarousel2/assets/vendors/jquery.min.js"></script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     @stack('scripts')
 </body>
 

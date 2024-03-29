@@ -11,9 +11,10 @@
                     <h1 class="title-login">@lang('register.title')</h1>
                     @if($errors->any())
                     @foreach ($errors->all() as $error)
+
                         <p class="bg-light">{{ $error }}</p>
                     @endforeach
-                @endif
+                   @endif
                 </div>
                 <form method="POST" action="{{ route('register') }}" class="mt-3">
                     @csrf

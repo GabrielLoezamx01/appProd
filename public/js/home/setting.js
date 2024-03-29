@@ -7,12 +7,15 @@
 //     .querySelector("meta[name='user_id']")
 //     .getAttribute("content");
 var apiCategories = "categorias";
+var search = "search_branch";
 
 const app = new Vue({
     el: "#app",
     data: {
         vue: true,
         categories: [],
+        mostrarResultados: false,
+        resultadosvue: [],
     },
     mounted() {
         // this.getPost();
@@ -26,7 +29,27 @@ const app = new Vue({
         },
         showCategorie: function (id) {
             alert(id);
-        }
+        },
+        buscar: function (event) {
+            axios
+                .get(search + "/" + event.target.value)
+                .then((response) => {
+                    const resultados = response.data;
+
+                    // Verificar si hay resultados
+                    if (resultados.length > 0) {
+                        // Mostrar la lista desplegada
+                        this.resultadosvue = resultados;
+                        this.mostrarResultados = true;
+                    } else {
+                        this.mostrarResultados = false;
+                    }
+                    console.log(this.mostrarResultados);
+                })
+                .catch((error) => {
+                    console.error("Error al obtener datos:", error);
+                });
+        },
         // mostrarImagenExpandida(img) {
         //     this.imagenExpandida = img.ruta;
         //     var myModal = new bootstrap.Modal(document.getElementById('imagenExpandidaModal'));
