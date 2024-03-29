@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\Recaptcha;
 
 class RegisterController extends Controller
 {
@@ -49,11 +50,13 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'g-recaptcha-response' => ['required', new Recaptcha()],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'type' => ['required'],
         ]);
+        return $validator;
     }
 
     /**
@@ -64,13 +67,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return  User::create([
-            'name'     =>   '',
-            'email'    => $data['email'],
-            'role_id'  => $data['type'],
-            'status'   => 1,
-            'password' => Hash::make($data['password']),
-        ]);
-
+            return  User::create([
+                'name'     =>   '',
+                'email'    => $data['email'],
+                'role_id'  => $data['type'],
+                'status'   => 1,
+                'password' => Hash::make($data['password']),
+            ]);
     }
 }
