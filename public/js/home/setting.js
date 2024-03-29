@@ -1,4 +1,4 @@
-// var apiPublications = "/customer/Publications";
+var apiPublications = "/customer/Publications";
 // var apiLikes = "customer/Likes_Publications/";
 // var apiShared = "customer/sharedPost";
 
@@ -16,12 +16,17 @@ const app = new Vue({
         categories: [],
         mostrarResultados: false,
         resultadosvue: [],
+        items: []
     },
     mounted() {
         // this.getPost();
-        this.getCategories();
+        this.mountedGet();
     },
     methods: {
+        mountedGet: function(){
+            this.getCategories();
+            this.getPost();
+        },
         getCategories: function () {
             axios
                 .get(apiCategories)
@@ -50,6 +55,13 @@ const app = new Vue({
                     console.error("Error al obtener datos:", error);
                 });
         },
+        getPost: function () {
+                axios
+                    .get(apiPublications)
+                    .then((response) => (this.items = response.data));
+                    console.log(this.items);
+        },
+
         // mostrarImagenExpandida(img) {
         //     this.imagenExpandida = img.ruta;
         //     var myModal = new bootstrap.Modal(document.getElementById('imagenExpandidaModal'));
