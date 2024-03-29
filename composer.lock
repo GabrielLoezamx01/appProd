@@ -3696,12 +3696,12 @@
             "version": "v0.7.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/resendlabs/resend-laravel.git",
+                "url": "https://github.com/resend/resend-laravel.git",
                 "reference": "feb5e3293d6948804ef7dd25aa99d0667ecf919a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/resendlabs/resend-laravel/zipball/feb5e3293d6948804ef7dd25aa99d0667ecf919a",
+                "url": "https://api.github.com/repos/resend/resend-laravel/zipball/feb5e3293d6948804ef7dd25aa99d0667ecf919a",
                 "reference": "feb5e3293d6948804ef7dd25aa99d0667ecf919a",
                 "shasum": ""
             },
@@ -3754,8 +3754,8 @@
                 "sdk"
             ],
             "support": {
-                "issues": "https://github.com/resendlabs/resend-laravel/issues",
-                "source": "https://github.com/resendlabs/resend-laravel/tree/v0.7.1"
+                "issues": "https://github.com/resend/resend-laravel/issues",
+                "source": "https://github.com/resend/resend-laravel/tree/v0.7.1"
             },
             "time": "2023-10-08T21:06:13+00:00"
         },
