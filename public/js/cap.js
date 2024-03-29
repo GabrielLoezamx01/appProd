@@ -2,7 +2,8 @@ document.addEventListener("submit", function (e) {
     e.preventDefault();
     grecaptcha.ready(function () {
         grecaptcha
-            .execute("6LcWPqgpAAAAALnTVjiik6enrsHxx-691jxYd2G5", {
+            .execute(captchaIdSite, {
+                // Utilizamos la variable JavaScript aquí
                 action: "submit",
             })
             .then(function (token) {
