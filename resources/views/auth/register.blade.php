@@ -8,13 +8,18 @@
             <img src="img/Frame -login.jpg" class="img-fluid text-center">
             <div class="bg-app p-5">
                 <div class="text-right">
+                    <a href="/login">
+                        <button class="btn p-2 btn-outline-secondary" title="Regresar">
+                            <i class="fas fa fa-arrow-left"></i> Regresar
+                        </button>
+                    </a>
+                    <hr>
                     <h1 class="title-login">@lang('register.title')</h1>
-                    @if($errors->any())
-                    @foreach ($errors->all() as $error)
-
-                        <p class="bg-light">{{ $error }}</p>
-                    @endforeach
-                   @endif
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <p class="bg-light">{{ $error }}</p>
+                        @endforeach
+                    @endif
                 </div>
                 <form method="POST" action="{{ route('register') }}" class="mt-3">
                     @csrf
@@ -33,8 +38,9 @@
                         <label for="password" class="fw-light">@lang('register.input-password')</label>
                         <div class="input-group">
                             <input type="password" id="password-field"
-                                class="form-control mt-3 @error('password') is-invalid @enderror"  placeholder="@lang('register.input-password-placeholder')"
-                                name="password" value="{{ old('password') }}" required autocomplete="current-password">
+                                class="form-control mt-3 @error('password') is-invalid @enderror"
+                                placeholder="@lang('register.input-password-placeholder')" name="password" value="{{ old('password') }}" required
+                                autocomplete="current-password">
                             <button class="btn btn-outline-secondary" type="button" id="showPassword">
                                 <i id="eyeIcon" class="far fa-eye"></i>
                             </button>
@@ -49,8 +55,9 @@
                         <label for="password" class="fw-light">@lang('register.input-passwordConfirm')</label>
                         <div class="input-group">
                             <input type="password" id="password-field2"
-                                class="form-control mt-3 @error('password2') is-invalid @enderror" placeholder="@lang('register.input-password-placeholder')"
-                                name="password_confirmation" value="{{ old('password2') }}" required autocomplete="current-password">
+                                class="form-control mt-3 @error('password2') is-invalid @enderror"
+                                placeholder="@lang('register.input-password-placeholder')" name="password_confirmation" value="{{ old('password2') }}"
+                                required autocomplete="current-password">
                             <button class="btn btn-outline-secondary" type="button" id="showPassword2">
                                 <i id="eyeIcon2" class="far fa-eye"></i>
                             </button>

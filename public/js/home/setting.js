@@ -16,14 +16,14 @@ const app = new Vue({
         categories: [],
         mostrarResultados: false,
         resultadosvue: [],
-        items: []
+        items: [],
     },
     mounted() {
         // this.getPost();
         this.mountedGet();
     },
     methods: {
-        mountedGet: function(){
+        mountedGet: function () {
             this.getCategories();
             this.getPost();
         },
@@ -56,12 +56,21 @@ const app = new Vue({
                 });
         },
         getPost: function () {
-                axios
-                    .get(apiPublications)
-                    .then((response) => (this.items = response.data));
-                    console.log(this.items);
+            axios
+                .get(apiPublications)
+                .then((response) => (this.items = response.data));
         },
-
+        Hashtags: function (texto) {
+            const regex = /#(\w+)/g;
+            const textoResaltado = texto.replace(
+                regex,
+                '<a href="Hashtags?value=$1" style="color: blue;" @click.prevent="redireccionar(\'$1\')">#$1</a>'
+            );
+            const textoResaltado1 =
+                '<i class="fas fa-info-circle fa-1x" style="color: #8FC82D; margin-left: 2rem;"></i>' +
+                textoResaltado;
+            return textoResaltado1;
+        },
         // mostrarImagenExpandida(img) {
         //     this.imagenExpandida = img.ruta;
         //     var myModal = new bootstrap.Modal(document.getElementById('imagenExpandidaModal'));

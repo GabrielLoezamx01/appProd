@@ -208,9 +208,9 @@
                 <input type="search" class="desing-btn" placeholder="Encontrar negocios cerca de ti" @input="buscar">
             </div>
             <ul v-if="mostrarResultados == true" class="lista-resultados">
-                <li v-for="resultado in resultadosvue" :key="resultado.id" class="ms-5 p-2" >
-                    <a :href="'view/branch/' + resultado.id" class="fw-bold "  style="color: #FFFFFF">
-                      @{{ resultado.nombre }}  @{{ resultado.codigo_postal }}
+                <li v-for="resultado in resultadosvue" :key="resultado.id" class="ms-5 p-2">
+                    <a :href="'view/branch/' + resultado.id" class="fw-bold " style="color: #FFFFFF">
+                        @{{ resultado.nombre }} @{{ resultado.codigo_postal }}
                     </a>
                 </li>
             </ul>
@@ -264,13 +264,29 @@
         <div class="p-5"></div>
     </div>
     <div class="container-fluid">
-        <div class="row text-center" style="background-color: #D6DFE3;">
-            <h4 class="mt-5">
+        <div class="row" style="background-color: #D6DFE3;">
+            <h4 class="mt-5 text-center">
                 <i class="fas fa-utensils me-2"></i>
                 <span class="ms-6">Recomendaciones de Restaurantes</span>
             </h4>
         </div>
     </div>
+    <div class="bg-white">
+        <div class="p-5"></div>
+        <div class="owl-carousel owl-theme">
+            <div v-for="item in items">
+                <div class="card text-justify item">
+                    <div class="card-body">
+                        <h2 class="fw-bold">@{{ item.sucursal.nombre }}</h2>
+                        <p class="card-text text-info text-dark" style="font-size: 15px;" v-html="Hashtags(item.contenido)">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     {{-- <div class="row text-center" style="background-color: #D6DFE3">
         <div class="p-5 text-center">
 
