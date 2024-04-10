@@ -1,7 +1,8 @@
 @extends('layouts.dashboard')
 @section('title', 'Mis Publicaciones')
 @section('content')
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="container-fluid">
+         <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center m-3">
@@ -104,6 +105,7 @@
                 </nav>
             </div>
         </section>
+    </div>
     </div>
     @push('scripts')
         <script src="js/profile/mypost.js"></script>

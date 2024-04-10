@@ -202,6 +202,7 @@
 
 @section('content')
     <div class="container-fluid">
+        <div class="p-3"></div>
         <div class="row m-3" id="app">
             <div class="input-container">
                 <i class="fa fa-map-marker icon-color" aria-hidden="true"></i>

@@ -7,7 +7,7 @@ use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ResetPassword;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Api\Home\SearchController;
-
+use App\Http\Middleware\DataUser;
 
 
 /*
@@ -33,7 +33,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(DataUser::class);
 
 #Update password users
 Route::post('/EmailReset',[ResetPassword::class , 'SendEmail'])->name('SendEmail');
@@ -45,6 +45,7 @@ Route::get('closeUser', [LoginController::class, 'logout'])->name('closeUser');
 
 
 Route::middleware(['auth'])->group(function () {
+
     Route::apiResource('categorias', CategoriasController::class);
     Route::apiResource('profile', ProfileController::class);
     Route::apiResource('search_branch', SearchController::class);
@@ -52,7 +53,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('profileIMG', [ProfileController::class, 'update'])->name('profileIMG');
 
     Route::view('perfil','auth.profile');
-    Route::view('MisPublicaciones','auth.Publications');
+    Route::view('MisPublicaciones','auth.Publications')->middleware(DataUser::class);;
 
     /*
     *   CLIENTES RUTAS API

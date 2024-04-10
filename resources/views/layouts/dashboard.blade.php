@@ -89,8 +89,8 @@
         </div>
     </nav>
 
-    <div id="app" style="margin-top: 6rem;">
-        <main class="">
+    <div id="app" style="margin-top: 4rem;">
+        <main class="mt-5">
             @yield('content')
         </main>
     </div>
