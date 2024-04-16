@@ -16,7 +16,9 @@ const app = new Vue({
         categories: [],
         mostrarResultados: false,
         resultadosvue: [],
-        items: [],
+        post: [],
+        loading: true,
+        page: false,
     },
     mounted() {
         // this.getPost();
@@ -25,7 +27,7 @@ const app = new Vue({
     methods: {
         mountedGet: function () {
             this.getCategories();
-            this.getPost();
+            this.page = true;
         },
         getCategories: function () {
             axios
@@ -40,10 +42,7 @@ const app = new Vue({
                 .get(search + "/" + event.target.value)
                 .then((response) => {
                     const resultados = response.data;
-
-                    // Verificar si hay resultados
                     if (resultados.length > 0) {
-                        // Mostrar la lista desplegada
                         this.resultadosvue = resultados;
                         this.mostrarResultados = true;
                     } else {
@@ -54,11 +53,6 @@ const app = new Vue({
                 .catch((error) => {
                     console.error("Error al obtener datos:", error);
                 });
-        },
-        getPost: function () {
-            axios
-                .get(apiPublications)
-                .then((response) => (this.items = response.data));
         },
         Hashtags: function (texto) {
             const regex = /#(\w+)/g;

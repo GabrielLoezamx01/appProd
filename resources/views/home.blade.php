@@ -4,6 +4,16 @@
 
 @push('styles')
     <style>
+    .title-seller {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Estilo para la imagen */
+        .image-container {
+            margin-right: 15px;
+        }
+
         .post-card {
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -201,122 +211,128 @@
 @endpush
 
 @section('content')
-    <div class="container-fluid">
-        <div class="p-3"></div>
-        <div class="row m-3" id="app">
-            <div class="input-container">
-                <i class="fa fa-map-marker icon-color" aria-hidden="true"></i>
-                <input type="search" class="desing-btn" placeholder="Encontrar negocios cerca de ti" @input="buscar">
+    <div v-if="page" id="app">
+        <div class="container-fluid">
+            <div class="p-3"></div>
+            <div class="row m-3">
+                <div class="input-container">
+                    <i class="fa fa-map-marker icon-color" aria-hidden="true"></i>
+                    <input type="search" class="desing-btn" placeholder="Encontrar negocios cerca de ti" @input="buscar">
+                </div>
+                <ul v-if="mostrarResultados == true" class="lista-resultados">
+                    <li v-for="resultado in resultadosvue" :key="resultado.id" class="ms-5 p-2">
+                        <a :href="'view/branch/' + resultado.id" class="fw-bold " style="color: #FFFFFF">
+                            @{{ resultado.nombre }} @{{ resultado.codigo_postal }}
+                        </a>
+                    </li>
+                </ul>
+
             </div>
-            <ul v-if="mostrarResultados == true" class="lista-resultados">
-                <li v-for="resultado in resultadosvue" :key="resultado.id" class="ms-5 p-2">
-                    <a :href="'view/branch/' + resultado.id" class="fw-bold " style="color: #FFFFFF">
-                        @{{ resultado.nombre }} @{{ resultado.codigo_postal }}
-                    </a>
-                </li>
-            </ul>
-
-        </div>
 
 
-        <div class="row">
-            <div class="cover-image"></div>
-        </div>
-        <div class="row align-items-center justify-content-center">
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item" v-for="(categorie, index) in categories.slice(0, 5)" :key="index"
-                        :class="{ 'active': index === 0 }">
-                        <div class="row">
-                            <div class="col text-center">
-                                <button @click="showCategorie(categorie.id)"
-                                    class="btn btn-category">@{{ categorie.name }}</button>
+            <div class="row">
+                <div class="cover-image"></div>
+            </div>
+            <div class="row align-items-center justify-content-center">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item" v-for="(categorie, index) in categories.slice(0, 5)"
+                            :key="index" :class="{ 'active': index === 0 }">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <button @click="showCategorie(categorie.id)"
+                                        class="btn btn-category">@{{ categorie.name }}</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </button>
-
             </div>
         </div>
-    </div>
-
-
-    <div class="bg-white">
-        <div class="p-5"></div>
-        <div class="owl-carousel owl-theme">
-            <div class="item cr-img">
-                <img src="img/demo.jpg" alt="">
+        <div class="bg-white">
+            <div class="p-5"></div>
+            <div class="owl-carousel owl-theme">
+                <div class="item cr-img">
+                    <img src="img/demo.jpg" alt="">
+                </div>
+                <div class="item cr-img">
+                    <img src="img/c.jpg" alt="">
+                </div>
+                <div class="item cr-img">
+                    <img src="img/1.jpg" alt="">
+                </div>
             </div>
-            <div class="item cr-img">
-                <img src="img/c.jpg" alt="">
-            </div>
-            <div class="item cr-img">
-                <img src="img/1.jpg" alt="">
+            <div class="p-5"></div>
+        </div>
+        <div class="container-fluid">
+            <div class="row" style="background-color: #D6DFE3;">
+                <h4 class="mt-5 text-center">
+                    <i class="fas fa-utensils me-2"></i>
+                    <span class="ms-6">Recomendaciones de Restaurantes</span>
+                </h4>
+                <div class="p-2"></div>
             </div>
         </div>
-        <div class="p-5"></div>
-    </div>
-    <div class="container-fluid">
-        <div class="row" style="background-color: #D6DFE3;">
-            <h4 class="mt-5 text-center">
-                <i class="fas fa-utensils me-2"></i>
-                <span class="ms-6">Recomendaciones de Restaurantes</span>
-            </h4>
-        </div>
-    </div>
-    <div class="bg-white">
-        <div class="p-5"></div>
-        <div class="owl-carousel owl-theme">
-            <div v-for="item in items">
-                <div class="card text-justify item">
-                    <div class="card-body">
-                        <h2 class="fw-bold">@{{ item.sucursal.nombre }}</h2>
-                        <p class="card-text text-info text-dark" style="font-size: 15px;" v-html="Hashtags(item.contenido)">
-                        </p>
+        <div class="bg-white">
+            <div class="p-5">
+            </div>
+            <div class="owl-carousel owl-theme">
+                @foreach ($posts as $item)
+                    <div class="item post-card">
+                        <div class="post-header ">
+                            <div class="title-seller">
+                                <div class="image-container">
+                                    <img src="img/icon.jpg" style="width: 6vh; border-radius: 50%;" class="img-fluid"
+                                        alt="">
+                                </div>
+                                <div class="mt-3">
+                                    <h5 class="fw-bold post-title ">{{ $item->sucursal->nombre }}</h5>
+
+                                    <address class="fs-light">   <i style="color: #8FC82D;" class="fas fa-map-marker-alt"></i> {{ $item->sucursal->direccion }}</address>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="fw-light">
+                                {{ $item->contenido }}
+                            </p>
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
-    </div>
-
-
-    {{-- <div class="row text-center" style="background-color: #D6DFE3">
-        <div class="p-5 text-center">
-
-        </div>
-
-    </div> --}}
 
 
 
-    @push('scripts')
-        <script src="{{ asset('js/home/setting.js') }}"></script>
-        <script>
-            $('.owl-carousel').owlCarousel({
-                stagePadding: 80,
-                loop: true,
-                margin: 20,
-                nav: true,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 2
-                    },
-                    1000: {
-                        items: 3
+        @push('scripts')
+            <script src="{{ asset('js/home/setting.js') }}"></script>
+            <script>
+                $('.owl-carousel').owlCarousel({
+                    stagePadding: 80,
+                    loop: true,
+                    margin: 20,
+                    nav: true,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 2
+                        },
+                        1000: {
+                            items: 3
+                        }
                     }
-                }
-            })
-        </script>
-    @endpush
-@endsection
+                })
+            </script>
+        @endpush
+    @endsection
