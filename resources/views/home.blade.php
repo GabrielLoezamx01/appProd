@@ -288,15 +288,14 @@
             <div class="owl-carousel owl-theme">
                 @foreach ($posts as $item)
                     <div class="item post-card">
-                        <div class="post-header ">
+                        <div class="post-header">
                             <div class="title-seller">
                                 <div class="image-container">
-                                    <img src="img/icon.jpg" style="width: 6vh; border-radius: 50%;" class="img-fluid"
+                                    <img src="img/icon.jpg" style="width: 4vh; border-radius: 50%;" class="img-fluid"
                                         alt="">
                                 </div>
                                 <div class="mt-3">
                                     <h5 class="fw-bold post-title ">{{ $item->sucursal->nombre }}</h5>
-
                                     <address class="fs-light">   <i style="color: #8FC82D;" class="fas fa-map-marker-alt"></i> {{ $item->sucursal->direccion }}</address>
                                 </div>
                             </div>
