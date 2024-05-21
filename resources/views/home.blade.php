@@ -4,7 +4,7 @@
 
 @push('styles')
     <style>
-    .title-seller {
+        .title-seller {
             display: flex;
             align-items: center;
         }
@@ -211,7 +211,11 @@
 @endpush
 
 @section('content')
+
     <div v-if="page" id="app">
+        @include('home.modalPost')
+
+
         <div class="container-fluid">
             <div class="p-3"></div>
             <div class="row m-3">
@@ -296,7 +300,8 @@
                                 </div>
                                 <div class="mt-3">
                                     <h5 class="fw-bold post-title ">{{ $item->sucursal->nombre }}</h5>
-                                    <address class="fs-light">   <i style="color: #8FC82D;" class="fas fa-map-marker-alt"></i> {{ $item->sucursal->direccion }}</address>
+                                    <address class="fs-light"> <i style="color: #8FC82D;" class="fas fa-map-marker-alt"></i>
+                                        {{ $item->sucursal->direccion }}</address>
                                 </div>
                             </div>
                         </div>
@@ -309,6 +314,11 @@
                 @endforeach
             </div>
         </div>
+        <button @click="abrirModal()" class="btn btn-floating circular-btn"
+            style="position: fixed; bottom: 20px; right: 20px; background-color: #8FC82D; padding: 8px; width: 40px; height: 40px;">
+            <i class="fas fa-plus fa-xs text-white"></i>
+        </button>
+
 
 
 

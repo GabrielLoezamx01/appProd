@@ -2,7 +2,7 @@ var apiPublications = "/customer/Publications";
 // var apiLikes = "customer/Likes_Publications/";
 // var apiShared = "customer/sharedPost";
 
-// var apiPublicationsClients = "customer/ClientsPublications";
+var apiPublicationsClients = "customer/ClientsPublications";
 // var id_user = document
 //     .querySelector("meta[name='user_id']")
 //     .getAttribute("content");
@@ -19,6 +19,8 @@ const app = new Vue({
         post: [],
         loading: true,
         page: false,
+        selectedCategory: null,
+        content: "",
     },
     mounted() {
         // this.getPost();
@@ -111,26 +113,28 @@ const app = new Vue({
         //             });
         //     }
         // },
-        // PostPublication: function () {
-        //     var body = {
-        //         'category_id': this.selectedCategory,
-        //         'content': this.content
-        //     };
-        //     axios.post(apiPublicationsClients, body)
-        //         .then(response => {
-        //             new Toast({ message: response.data.message, type: 'success' });
-        //             this.content = '';
-        //             this.selectedCategory = null;
-        //         })
-        //         .catch(error => {
-        //             new Toast({ message: 'Error al hacer la solicitud, verifica los datos antes de publicar', type: 'danger' });
+        PostPublication: function () {
+            var body = {
+                'category_id': this.selectedCategory,
+                'content': this.content
+            };
+            axios.post(apiPublicationsClients, body)
+                .then(response => {
+                    new Toast({ message: response.data.message, type: 'success' });
+                    this.content = '';
+                    this.selectedCategory = null;
+                })
+                .catch(error => {
+                    new Toast({ message: 'Error al hacer la solicitud, verifica los datos antes de publicar', type: 'danger' });
 
-        //         });
-        // },
-        // abrirModal: function () {
-        //     var miModal = new bootstrap.Modal(document.getElementById('miModal'));
-        //     miModal.show();
-        // },
+                });
+        },
+        abrirModal: function () {
+            var miModal = new bootstrap.Modal(
+                document.getElementById("miModal")
+            );
+            miModal.show();
+        },
         // shared: function(id){
         //     const body = {
         //         'id_post': id
