@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PublicacionesClientes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class PostClientsController extends Controller
 {
     /**
@@ -74,12 +75,16 @@ class PostClientsController extends Controller
      */
     public function destroy(string $id)
     {
-        $publicacionAEliminar = PublicacionesClientes::find($id);
-        if ($publicacionAEliminar) {
+        try {
+            DB::beginTransaction();
+            $publicacionAEliminar = PublicacionesClientes::findOrFail($id);
+            DB::table('comments_clients')->where('idpost', $publicacionAEliminar->id)->delete();
             $publicacionAEliminar->delete();
-            return response()->json(['message' => 'La publicación fue eliminada correctamente'], 200);
-        } else {
-            return response()->json(['error' => 'La publicación no se encontró'], 404);
+            DB::commit();
+            return response()->json(['message' => 'La publicación y sus comentarios fueron eliminados correctamente'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => 'Error al eliminar la publicación: ' . $e->getMessage()], 500);
         }
     }
 }

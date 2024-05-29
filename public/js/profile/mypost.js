@@ -50,6 +50,8 @@ const app = new Vue({
                                 const url = api + '/' + idPost;
                                 axios.delete(url)
                                     .then(response => {
+                                            console.log(response);
+
                                         new Toast({ message: response.data.message, type: 'success' });
                                         axios
                                         .get(api, {
