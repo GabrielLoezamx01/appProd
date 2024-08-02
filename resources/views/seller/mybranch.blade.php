@@ -3,7 +3,11 @@
 @section('content')
     <div class=" mt-5 row d-flex justify-content-center align-items-center  "
         style="min-height: 100vh; background-color: #D6DFE4;">
+        {{-- {{ $variable }}
+        @foreach ($sucursales as $sucursal)
+            {{ $sucursal->nombre }}
 
+        @endforeach --}}
         <div class="col-md-5 m-5">
             <div class="d-md-flex align-items-cente card">
                 <div class="card-body" >
