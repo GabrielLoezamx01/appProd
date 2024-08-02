@@ -1,0 +1,175 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #d6dfe4;
+
+}
+.custom-margin {
+    margin-top: 80px;
+}
+
+.btn-options {
+    border-radius: 50px; /* Radio del borde más moderado para un botón más estilizado */
+    color: #ffffff; /* Color del texto blanco */
+    font-size: 14px; /* Tamaño de fuente más grande para mayor legibilidad */
+    padding: 12px 24px; /* Más padding para un botón más espacioso */
+    text-align: center; /* Centrar el texto dentro del botón */
+    text-decoration: none; /* Eliminar subrayado en el texto si es un enlace */
+    display: inline-block; /* Asegura que el botón respete el padding y el tamaño */
+    border: none; /* Eliminar borde predeterminado */
+    cursor: pointer; /* Mostrar el cursor de puntero para indicar que es interactivo */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves para cambios de color y efectos de clic */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra sutil para dar profundidad */
+}
+/* Colores específicos para botones */
+.btn-primary {
+    background-color: #019c04; /* Verde primario */
+}
+
+.btn-error {
+    background-color: #d9534f; /* Rojo para errores */
+}
+
+.btn-warning {
+    background-color: #f0ad4e; /* Amarillo para advertencias */
+}
+
+.btn-info {
+    background-color: #5bc0de; /* Azul para información */
+}
+
+.btn-black {
+    background-color: #333333; /* Negro para botones especiales */
+}
+
+/* Efectos de hover y active */
+
+/* Efectos de hover y active para los botones primarios */
+.btn-primary:hover {
+    background-color: #017b03; /* Cambia a un verde más oscuro */
+    transform: scale(1.05); /* Escala el botón ligeramente */
+}
+
+.btn-primary:active {
+    background-color: #016700; /* Verde aún más oscuro */
+    transform: scale(0.95); /* Reduce el tamaño del botón al presionar */
+}
+
+/* Efectos de hover y active para los botones de error */
+.btn-error:hover {
+    background-color: #c9302c; /* Rojo más oscuro */
+    transform: scale(1.05); /* Escala el botón ligeramente */
+}
+
+.btn-error:active {
+    background-color: #a62b1e; /* Rojo aún más oscuro */
+    transform: scale(0.95); /* Reduce el tamaño del botón al presionar */
+}
+
+/* Efectos de hover y active para los botones de advertencia */
+.btn-warning:hover {
+    background-color: #ec971f; /* Amarillo más oscuro */
+    transform: scale(1.05); /* Escala el botón ligeramente */
+}
+
+.btn-warning:active {
+    background-color: #d5851c; /* Amarillo aún más oscuro */
+    transform: scale(0.95); /* Reduce el tamaño del botón al presionar */
+}
+
+/* Efectos de hover y active para los botones de información */
+.btn-info:hover {
+    background-color: #31b0d5; /* Azul más oscuro */
+    transform: scale(1.05); /* Escala el botón ligeramente */
+}
+
+.btn-info:active {
+    background-color: #2a9fd6; /* Azul aún más oscuro */
+    transform: scale(0.95); /* Reduce el tamaño del botón al presionar */
+}
+
+/* Efectos de hover y active para los botones negros */
+.btn-black:hover {
+    background-color: #2c2c2c; /* Negro más claro */
+    transform: scale(1.05); /* Escala el botón ligeramente */
+}
+
+.btn-black:active {
+    background-color: #1a1a1a; /* Negro aún más oscuro */
+    transform: scale(0.95); /* Reduce el tamaño del botón al presionar */
+}
+
+.btn-group-horizontal {
+    display: flex; /* Usa flexbox para alinear los botones en una fila */
+    gap: 10px; /* Espacio entre los botones, ajusta según sea necesario */
+    justify-content: center; /* Centra los botones horizontalmente en el contenedor */
+}
+.btn-group-vertical {
+    display: flex; /* Usa flexbox para alinear los botones en una columna */
+    flex-direction: column; /* Alinea los botones en una columna */
+    gap: 10px; /* Espacio entre los botones, ajusta según sea necesario */
+    align-items: center; /* Centra los botones horizontalmente dentro del contenedor */
+}
+
+    .table-container {
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 1200px;
+      padding: 20px;
+    }
+    .table-title {
+      color: #019c04; /* Verde oscuro */
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .table thead th {
+      background-color: #019c04; /* Verde oscuro */
+      color: #ffffff;
+      text-align: center;
+    }
+    .table tbody td {
+      background-color: #f8f9fa; /* Gris claro */
+      vertical-align: middle;
+    }
+    .table tbody tr:hover {
+      background-color: #e9ecef; /* Gris claro más oscuro para hover */
+    }
+    .table th i {
+      margin-left: 8px;
+      font-size: 14px;
+    }
+    .table thead th, .table tbody td {
+      padding: 12px;
+    }
+  .small-img {
+    width: 50px; /* Ancho de 20 píxeles */
+    height: 50px; /* Altura de 20 píxeles */
+    object-fit: cover; /* Asegura que la imagen mantenga sus proporciones sin distorsión */
+    display: block; /* Elimina el espacio extra debajo de la imagen (opcional) */
+  }
+
+
+  .borderless-input {
+    border: none;
+    border-bottom: 0.5px solid #00000043;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    font-size: 15px;
+    font-weight: 600;
+    padding-bottom: 15px;
+}
+
+.post-content{
+    border: none;
+    outline: none;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.6);
+}
